@@ -42,21 +42,21 @@ url('bg.jpg') center/cover no-repeat}
 .stat-number{font-size:26px;font-weight:900;color:var(--gold)}
 .stat-label{font-size:12px;color:#e8f3ee;font-weight:700}
 
-/* SECTION UTAMA & ANIMASI SCROLL */
+/* SECTION UTAMA */
 section{padding:80px 7%}
 .container{max-width:1120px;margin:auto}
 .eyebrow{color:var(--green2);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}
 h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 .lead{color:var(--muted);max-width:750px;margin-bottom:12px}
 
-/* Kelas Animasi Scroll ke Bawah */
-.fade-in-section {
+/* EFEK ANIMASI SCROLL (FADE-IN UP) */
+.animate-up {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateY(35px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
   will-change: opacity, transform;
 }
-.fade-in-section.is-visible {
+.animate-up.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -208,7 +208,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </header>
 
 <!-- SECTION TENTANG -->
-<section class="about-section fade-in-section" id="tentang">
+<section class="about-section animate-up" id="tentang">
   <div class="container">
     <span class="eyebrow">Tentang Kami</span>
     <h3>Pengabdian Masyarakat P2M 2027</h3>
@@ -219,7 +219,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </section>
 
 <!-- ANGGOTA & KEPENGURUSAN -->
-<section class="team-section fade-in-section" id="struktur">
+<section class="team-section animate-up" id="struktur">
  <div class="container">
   <span class="eyebrow">Struktur Organisasi</span>
   <h3>Tim P2M MA Plus Al-Ittihaad</h3>
@@ -492,7 +492,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </section>
 
 <!-- PROGRAM KERJA -->
-<section class="info-section fade-in-section" id="program">
+<section class="info-section animate-up" id="program">
   <div class="container">
     <span class="eyebrow">Informasi Kegiatan</span>
     <h3>Program Kerja</h3>
@@ -510,7 +510,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </section>
 
 <!-- PUBLIKASI -->
-<section class="fade-in-section" style="background:#fff;" id="publikasi">
+<section class="animate-up" style="background:#fff;" id="publikasi">
   <div class="container">
     <span class="eyebrow">Dokumentasi & Berita</span>
     <h3>Publikasi</h3>
@@ -521,7 +521,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </section>
 
 <!-- GALERI -->
-<section class="info-section fade-in-section" id="galeri">
+<section class="info-section animate-up" id="galeri">
   <div class="container">
     <span class="eyebrow">Foto & Video</span>
     <h3>Galeri Kegiatan</h3>
@@ -532,7 +532,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </section>
 
 <!-- LOKASI -->
-<section class="fade-in-section" style="background:#fff;" id="lokasi">
+<section class="animate-up" style="background:#fff;" id="lokasi">
   <div class="container">
     <span class="eyebrow">Peta & Wilayah</span>
     <h3>Lokasi Pengabdian</h3>
@@ -544,7 +544,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </section>
 
 <!-- KONTAK / INFORMASI KELOMPOK -->
-<section class="contact-section fade-in-section" id="kontak">
+<section class="contact-section animate-up" id="kontak">
   <div class="container">
     <span class="eyebrow">Kontak</span>
     <h3>Informasi Kelompok</h3>
@@ -693,24 +693,24 @@ window.addEventListener('click', (e) => {
   }
 });
 
-// Skrip Animasi Scroll ke Bawah (Fade-in saat elemen terlihat)
+// Skrip Animasi Scroll ke Bawah (Fade-in Up seperti contoh)
 document.addEventListener("DOMContentLoaded", function() {
   const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.15
+    threshold: 0.1
   };
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
+        entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  document.querySelectorAll('.fade-in-section').forEach(section => {
+  document.querySelectorAll('.animate-up').forEach(section => {
     observer.observe(section);
   });
 });
