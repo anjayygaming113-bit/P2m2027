@@ -125,6 +125,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 .member-item{
   display:flex;align-items:center;gap:12px;background:var(--cream);padding:10px 14px;border-radius:12px;
 }
+.member-item img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#cddcd5}
 .member-item span{font-weight:700;font-size:14px;color:var(--dark)}
 
 .footer{background:#082f21;color:#d7e7df;padding:40px 7%}
@@ -572,7 +573,33 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 <!-- POPUP MODALS ANGGOTA -->
 <div class="modal" id="modal-sekretaris"><div class="modal-content"><button class="close-btn" onclick="closeModal('sekretaris')">✕</button><div class="modal-title">Anggota Sekretaris</div><div class="member-list"><div class="member-item"><span>Dana Jaenal Mutakin</span></div></div></div></div>
 <div class="modal" id="modal-bendahara"><div class="modal-content"><button class="close-btn" onclick="closeModal('bendahara')">✕</button><div class="modal-title">Anggota Bendahara</div><div class="member-list"><div class="member-item"><span>Karin Waladiatul Ramdani</span></div></div></div></div>
-<div class="modal" id="modal-pdd"><div class="modal-content"><button class="close-btn" onclick="closeModal('pdd')">✕</button><div class="modal-title">Anggota Divisi PDD</div><div class="member-list"><div class="member-item"><span>Sandi Pirmansah</span></div><div class="member-item"><span>M. Al-fauzan</span></div><div class="member-item"><span>Erni Nurwidiyanti</span></div><div class="member-item"><span>Raihana Kansa Aulia</span></div></div></div></div>
+
+<!-- MODAL PDD DENGAN FOTO -->
+<div class="modal" id="modal-pdd">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('pdd')">✕</button>
+    <div class="modal-title">Anggota Divisi PDD</div>
+    <div class="member-list">
+      <div class="member-item">
+        <img src="pdd_sandi.jpg" alt="Sandi Pirmansah">
+        <span>Sandi Pirmansah</span>
+      </div>
+      <div class="member-item">
+        <img src="pdd_fauzan.jpg" alt="M. Al-fauzan">
+        <span>M. Al-fauzan</span>
+      </div>
+      <div class="member-item">
+        <img src="pdd_erni.jpg" alt="Erni Nurwidiyanti">
+        <span>Erni Nurwidiyanti</span>
+      </div>
+      <div class="member-item">
+        <img src="pdd_raihana.jpg" alt="Raihana Kansa Aulia">
+        <span>Raihana Kansa Aulia</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="modal-acara"><div class="modal-content"><button class="close-btn" onclick="closeModal('acara')">✕</button><div class="modal-title">Anggota Divisi Acara</div><div class="member-list"><div class="member-item"><span>Nisa Adila Wardani</span></div></div></div></div>
 <div class="modal" id="modal-peralatan"><div class="modal-content"><button class="close-btn" onclick="closeModal('peralatan')">✕</button><div class="modal-title">Anggota Divisi Peralatan</div><div class="member-list"><div class="member-item"><span>Zia Al-Khulaeni</span></div></div></div></div>
 <div class="modal" id="modal-logistik"><div class="modal-content"><button class="close-btn" onclick="closeModal('logistik')">✕</button><div class="modal-title">Anggota Divisi Logistik</div><div class="member-list"><div class="member-item"><span>Muhammad Akmal Al Fajri</span></div></div></div></div>
