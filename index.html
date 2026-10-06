@@ -125,18 +125,15 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 .close-btn{position:absolute;top:16px;right:20px;font-size:26px;background:none;border:none;cursor:pointer;color:var(--muted)}
 .modal-title{font-size:19px;font-weight:800;color:var(--green);margin-bottom:18px;border-bottom:2px solid var(--cream);padding-bottom:10px}
 
-/* TAMPILAN ANGGOTA & FOTO YANG DIPERBARUI */
+/* ITEM ANGGOTA */
 .member-list{display:flex;flex-direction:column;gap:12px}
 .member-item{
-  display:flex;align-items:center;gap:16px;background:var(--cream);padding:12px 16px;border-radius:16px;
-  border:1px solid #ebdcc4;transition:.2s;
+  display:flex;align-items:center;justify-content:space-between;background:var(--cream);padding:14px 18px;border-radius:16px;
+  border:1px solid #ebdcc4;transition:.2s;cursor:pointer;
 }
 .member-item:hover{background:#f3ecdb}
-.member-item img{
-  width:55px;height:55px;min-width:55px;border-radius:50%;object-fit:cover;object-position:top;background:#cddcd5;
-  border:2px solid var(--gold);box-shadow:0 4px 10px rgba(0,0,0,.1);
-}
 .member-item span{font-weight:800;font-size:15px;color:var(--dark);line-height:1.3}
+.view-photo-btn{font-size:12px;background:var(--green);color:#fff;padding:6px 12px;border-radius:8px;font-weight:700;}
 
 .footer{background:#082f21;color:#d7e7df;padding:40px 7%}
 .footer-inner{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:20px;align-items:center}
@@ -584,29 +581,39 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 <div class="modal" id="modal-sekretaris"><div class="modal-content"><button class="close-btn" onclick="closeModal('sekretaris')">✕</button><div class="modal-title">Anggota Sekretaris</div><div class="member-list"><div class="member-item"><span>Dana Jaenal Mutakin</span></div></div></div></div>
 <div class="modal" id="modal-bendahara"><div class="modal-content"><button class="close-btn" onclick="closeModal('bendahara')">✕</button><div class="modal-title">Anggota Bendahara</div><div class="member-list"><div class="member-item"><span>Karin Waladiatul Ramdani</span></div></div></div></div>
 
-<!-- MODAL PDD DENGAN TAMPILAN FOTO BARU -->
+<!-- MODAL PDD (KLIK NAMA MUNCUL FOTO BESAR) -->
 <div class="modal" id="modal-pdd">
   <div class="modal-content">
     <button class="close-btn" onclick="closeModal('pdd')">✕</button>
     <div class="modal-title">Anggota Divisi PDD</div>
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 15px;">Ketuk nama anggota untuk melihat foto:</p>
     <div class="member-list">
-      <div class="member-item">
-        <img src="pdd_sandi.jpg" alt="Sandi Pirmansah" loading="lazy">
+      <div class="member-item" onclick="showPhoto('Sandi Pirmansah', 'pdd_sandi.jpg')">
         <span>Sandi Pirmansah</span>
+        <span class="view-photo-btn">Lihat Foto 📷</span>
       </div>
-      <div class="member-item">
-        <img src="pdd_fauzan.jpg" alt="M. Al-fauzan" loading="lazy">
+      <div class="member-item" onclick="showPhoto('M. Al-fauzan', 'pdd_fauzan.jpg')">
         <span>M. Al-fauzan</span>
+        <span class="view-photo-btn">Lihat Foto 📷</span>
       </div>
-      <div class="member-item">
-        <img src="pdd_erni.jpg" alt="Erni Nurwidiyanti" loading="lazy">
+      <div class="member-item" onclick="showPhoto('Erni Nurwidiyanti', 'pdd_erni.jpg')">
         <span>Erni Nurwidiyanti</span>
+        <span class="view-photo-btn">Lihat Foto 📷</span>
       </div>
-      <div class="member-item">
-        <img src="pdd_raihana.jpg" alt="Raihana Kansa Aulia" loading="lazy">
+      <div class="member-item" onclick="showPhoto('Raihana Kansa Aulia', 'pdd_raihana.jpg')">
         <span>Raihana Kansa Aulia</span>
+        <span class="view-photo-btn">Lihat Foto 📷</span>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- MODAL LIGHTBOX FOTO BESAR KHUSUS -->
+<div class="modal" id="photo-modal" style="z-index: 110;">
+  <div class="modal-content" style="text-align:center; max-width: 360px;">
+    <button class="close-btn" onclick="closePhotoModal()">✕</button>
+    <div class="modal-title" id="photo-title" style="margin-bottom: 15px;">Foto Anggota</div>
+    <img id="modal-big-img" src="" alt="Foto Anggota" style="width:100%; height:auto; max-height:320px; border-radius:18px; object-fit:cover; border:3px solid var(--gold); box-shadow:0 10px 25px rgba(0,0,0,.15);">
   </div>
 </div>
 
@@ -653,6 +660,18 @@ function closeModal(id) {
   if (modal) {
     modal.classList.remove('active');
   }
+}
+
+// Fungsi untuk memunculkan foto besar anggota saat namanya diklik
+function showPhoto(name, imgSrc) {
+  document.getElementById('photo-title').innerText = name;
+  document.getElementById('modal-big-img').src = imgSrc;
+  document.getElementById('photo-modal').classList.add('active');
+}
+
+// Fungsi untuk menutup modal foto besar
+function closePhotoModal() {
+  document.getElementById('photo-modal').classList.remove('active');
 }
 
 // Tutup modal jika area luar (backdrop) diklik
