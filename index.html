@@ -53,7 +53,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 .about-section{background:var(--cream)}
 .about-highlight{font-size:16px;font-weight:800;color:var(--green);margin:15px 0 10px;letter-spacing:1px}
 
-/* SLIDER ANGGOTA TIM (Dioptimalkan agar tidak bug) */
+/* SLIDER ANGGOTA TIM */
 .team-section{background:#fff}
 .team-slider{
   display:flex;gap:20px;overflow-x:auto;padding:20px 5px;
@@ -104,33 +104,39 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 }
 .form-btn:hover{background:var(--green2)}
 
-/* POPUP MODAL ANGGOTA */
+/* POPUP MODAL ANGGOTA DENGAN ANIMASI KEREN */
 .modal{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;
-  align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px);
-  opacity:0;transition:opacity .3s ease;
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:100;
+  align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);
+  opacity:0;transition:opacity .35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .modal.active{
   display:flex;opacity:1;
 }
 .modal-content{
-  background:#fff;border-radius:24px;max-width:450px;width:100%;max-height:80vh;
-  overflow-y:auto;padding:25px;position:relative;box-shadow:0 25px 50px rgba(0,0,0,.25);
-  transform:scale(0.85);transition:transform .3s ease;
+  background:#fff;border-radius:28px;max-width:420px;width:100%;max-height:82vh;
+  overflow-y:auto;padding:28px;position:relative;box-shadow:0 25px 60px rgba(0,0,0,.3);
+  transform:scale(0.7) translateY(30px);
+  transition:transform .4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .modal.active .modal-content{
-  transform:scale(1);
+  transform:scale(1) translateY(0);
 }
-.close-btn{position:absolute;top:15px;right:20px;font-size:24px;background:none;border:none;cursor:pointer;color:var(--muted)}
-.modal-title{font-size:18px;font-weight:800;color:var(--green);margin-bottom:15px;border-bottom:2px solid var(--cream);padding-bottom:10px}
+.close-btn{position:absolute;top:16px;right:20px;font-size:26px;background:none;border:none;cursor:pointer;color:var(--muted)}
+.modal-title{font-size:19px;font-weight:800;color:var(--green);margin-bottom:18px;border-bottom:2px solid var(--cream);padding-bottom:10px}
 
-/* ITEM ANGGOTA */
-.member-list{display:flex;flex-direction:column;gap:10px}
+/* TAMPILAN ANGGOTA & FOTO YANG DIPERBARUI */
+.member-list{display:flex;flex-direction:column;gap:12px}
 .member-item{
-  display:flex;align-items:center;gap:12px;background:var(--cream);padding:10px 14px;border-radius:12px;
+  display:flex;align-items:center;gap:16px;background:var(--cream);padding:12px 16px;border-radius:16px;
+  border:1px solid #ebdcc4;transition:.2s;
 }
-.member-item img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#cddcd5}
-.member-item span{font-weight:700;font-size:14px;color:var(--dark)}
+.member-item:hover{background:#f3ecdb}
+.member-item img{
+  width:55px;height:55px;min-width:55px;border-radius:50%;object-fit:cover;object-position:top;background:#cddcd5;
+  border:2px solid var(--gold);box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.member-item span{font-weight:800;font-size:15px;color:var(--dark);line-height:1.3}
 
 .footer{background:#082f21;color:#d7e7df;padding:40px 7%}
 .footer-inner{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:20px;align-items:center}
@@ -578,7 +584,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 <div class="modal" id="modal-sekretaris"><div class="modal-content"><button class="close-btn" onclick="closeModal('sekretaris')">✕</button><div class="modal-title">Anggota Sekretaris</div><div class="member-list"><div class="member-item"><span>Dana Jaenal Mutakin</span></div></div></div></div>
 <div class="modal" id="modal-bendahara"><div class="modal-content"><button class="close-btn" onclick="closeModal('bendahara')">✕</button><div class="modal-title">Anggota Bendahara</div><div class="member-list"><div class="member-item"><span>Karin Waladiatul Ramdani</span></div></div></div></div>
 
-<!-- MODAL PDD DENGAN FOTO -->
+<!-- MODAL PDD DENGAN TAMPILAN FOTO BARU -->
 <div class="modal" id="modal-pdd">
   <div class="modal-content">
     <button class="close-btn" onclick="closeModal('pdd')">✕</button>
