@@ -569,18 +569,19 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
         </div>
       </div>
 
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan/Saran Anda telah terkirim.');">
+      <!-- FORMULIR TERHUBUNG KE GMAIL (Formspree) -->
+      <form class="contact-form" action="https://formspree.io/f/xdeaaknr" method="POST">
         <div class="form-group">
           <label>Nama</label>
-          <input type="text" placeholder="Masukkan nama" required>
+          <input type="text" name="nama" placeholder="Masukkan nama" required>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" placeholder="nama@email.com" required>
+          <input type="email" name="email" placeholder="nama@email.com" required>
         </div>
         <div class="form-group">
           <label>Pesan</label>
-          <textarea rows="4" placeholder="Tulis pesan atau saran" required></textarea>
+          <textarea name="pesan" rows="4" placeholder="Tulis pesan atau saran" required></textarea>
         </div>
         <button type="submit" class="form-btn">Kirim Pesan</button>
       </form>
