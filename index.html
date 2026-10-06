@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P2M 2027 — MA Plus Al-Ittihaad</title>
+<style>
+:root{
+  --green:#0d5c3a; --green2:#14734a; --cream:#f7f3e8; --gold:#c9a84e;
+  --dark:#123127; --white:#fff; --muted:#66756e; --shadow:0 16px 45px rgba(10,45,30,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* NAVIGASI */
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:10px 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.98);box-shadow:0 5px 25px rgba(0,0,0,.08);backdrop-filter:blur(10px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}
+.brand-logo-img{width:42px;height:42px;object-fit:contain;border-radius:0 !important;display:block}
+.brand span{font-size:14px;line-height:1.2;color:var(--dark)}
+.brand small{display:block;font-weight:500;opacity:.7;color:var(--green2)}
+.links{display:flex;gap:20px;font-size:14px;font-weight:700}
+.links a:hover{color:var(--gold)}
+.menu{display:none;border:0;background:none;font-size:26px;cursor:pointer}
+
+/* HERO SECTION */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:
+linear-gradient(120deg,rgba(7,55,35,.85),rgba(12,95,60,.75)),
+url('bg.jpg') center/cover no-repeat}
+.hero:after{content:"";position:absolute;inset:auto -10% -160px;height:300px;background:var(--cream);border-radius:50% 50% 0 0/35% 35% 0 0}
+.hero-content{position:relative;z-index:2;color:white;max-width:850px;margin:0 auto;padding:120px 7% 160px;text-align:center}
+.badge{display:inline-block;padding:8px 15px;border:1px solid rgba(255,255,255,.35);border-radius:99px;background:rgba(255,255,255,.1);font-size:13px;letter-spacing:1px}
+.hero h1{font-size:clamp(40px,8vw,90px);line-height:.95;margin:22px 0 12px;letter-spacing:-2px}
+.hero h2{font-size:clamp(20px,4vw,34px);font-weight:500}
+.tagline{font-size:18px;margin:22px 0 35px;color:#f8e8af;font-weight:800;letter-spacing:2px}
+.btn{display:inline-block;padding:14px 22px;border-radius:12px;background:var(--gold);color:#1b261d;font-weight:800;box-shadow:0 8px 25px rgba(0,0,0,.15);transition:.25s}
+
+/* STATISTIK RINGKAS */
+.stats-container{display:flex;justify-content:center;gap:20px;margin-top:25px;flex-wrap:wrap}
+.stat-card{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:12px 25px;border-radius:16px;backdrop-filter:blur(5px);text-align:center}
+.stat-number{font-size:26px;font-weight:900;color:var(--gold)}
+.stat-label{font-size:12px;color:#e8f3ee;font-weight:700}
+
+/* SECTION UTAMA */
+section{padding:80px 7%}
+.container{max-width:1120px;margin:auto}
+.eyebrow{color:var(--green2);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
+.lead{color:var(--muted);max-width:750px;margin-bottom:12px}
+
+/* SECTION TENTANG */
+.about-section{background:var(--cream)}
+.about-highlight{font-size:16px;font-weight:800;color:var(--green);margin:15px 0 10px;letter-spacing:1px}
+
+/* SLIDER ANGGOTA TIM */
+.team-section{background:#fff}
+.team-slider{display:flex;gap:20px;overflow-x:auto;padding:20px 5px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.team-slider::-webkit-scrollbar{height:6px}
+.team-slider::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
+.team-card{flex:0 0 250px;scroll-snap-align:start;background:#fff;border-radius:24px;border:1px solid #e8eee9;box-shadow:0 10px 30px rgba(0,0,0,.05);overflow:hidden;text-align:center;transition:.3s}
+.team-card.clickable{cursor:pointer}
+.team-card.clickable:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(13,92,58,.15)}
+.team-img-box{width:100%;height:270px;background:#e2ece7;position:relative;overflow:hidden}
+.team-img-box img{width:100%;height:100%;object-fit:cover;object-position:top}
+.team-info{padding:18px 12px}
+.team-info h4{font-size:16px;color:var(--dark);margin-bottom:4px;font-weight:800}
+.team-info p{font-size:13px;font-weight:700;color:var(--green2)}
+.click-hint{font-size:11px;color:var(--gold);font-weight:bold;margin-top:5px;display:block}
+
+/* SECTION PROGRAM & LAINNYA */
+.info-section{background:var(--cream)}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:25px}
+.info-box{background:#fff;padding:25px;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,.04);border:1px solid #e2ece7}
+.info-box h4{color:var(--green);margin-bottom:10px;font-size:18px}
+.placeholder-text{color:var(--muted);font-style:italic;font-size:14px}
+
+/* SECTION KONTAK */
+.contact-section{background:#fff}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;margin-top:25px}
+.contact-info-list{display:flex;flex-direction:column;gap:15px}
+.contact-card{background:#f9fbf9;border:1px solid #e2ece7;padding:20px 24px;border-radius:20px;box-shadow:0 5px 15px rgba(0,0,0,.02)}
+.contact-card small{display:block;color:var(--muted);font-size:12px;font-weight:700;margin-bottom:4px}
+.contact-card strong{font-size:16px;color:var(--dark)}
+.contact-card a{color:var(--green2);text-decoration:none}
+.contact-card a:hover{text-decoration:underline}
+
+/* FORM PESAN */
+.contact-form{background:#f9fbf9;border:1px solid #e2ece7;padding:25px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.03)}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--dark)}
+.form-group input, .form-group textarea{
+  width:100%;padding:14px 18px;border:1px solid #dce6e0;border-radius:14px;
+  font-family:inherit;font-size:14px;background:#fff;outline:none;transition:.2s;
+}
+.form-group input:focus, .form-group textarea:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(20,115,74,.1)}
+.form-btn{
+  width:100%;padding:14px;border:none;border-radius:14px;background:var(--green);
+  color:#fff;font-weight:800;font-size:15px;cursor:pointer;transition:.25s;
+}
+.form-btn:hover{background:var(--green2)}
+
+/* POPUP MODAL ANGGOTA */
+.modal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;
+  align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px);
+  opacity:0;transition:opacity .3s ease;
+}
+.modal.active{
+  display:flex;opacity:1;
+}
+.modal-content{
+  background:#fff;border-radius:24px;max-width:450px;width:100%;max-height:80vh;
+  overflow-y:auto;padding:25px;position:relative;box-shadow:0 25px 50px rgba(0,0,0,.25);
+  transform:scale(0.85);transition:transform .3s ease;
+}
+.modal.active .modal-content{
+  transform:scale(1);
+}
+.close-btn{position:absolute;top:15px;right:20px;font-size:24px;background:none;border:none;cursor:pointer;color:var(--muted)}
+.modal-title{font-size:18px;font-weight:800;color:var(--green);margin-bottom:15px;border-bottom:2px solid var(--cream);padding-bottom:10px}
+
+/* ITEM ANGGOTA */
+.member-list{display:flex;flex-direction:column;gap:10px}
+.member-item{
+  display:flex;align-items:center;gap:12px;background:var(--cream);padding:10px 14px;border-radius:12px;
+}
+.member-item img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#cddcd5}
+.member-item span{font-weight:700;font-size:14px;color:var(--dark)}
+
+.footer{background:#082f21;color:#d7e7df;padding:40px 7%}
+.footer-inner{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:20px;align-items:center}
+
+@media(max-width:800px){
+ .links{display:none}
+ .menu{display:block;color:inherit}
+ .nav.open .links{
+   display:flex;position:absolute;top:62px;left:0;right:0;
+   background:white;padding:20px 7%;flex-direction:column;gap:15px;
+   box-shadow:0 15px 25px rgba(0,0,0,.08);
+ }
+ .footer-inner{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav" id="nav">
+  <a class="brand" href="#beranda">
+    <img src="logo.jpeg" alt="Logo MA Plus Al-Ittihaad" class="brand-logo-img">
+    <span>P2M 2027<small>MA Plus Al-Ittihaad</small></span>
+  </a>
+  <button class="menu" id="menu">☰</button>
+  <div class="links">
+    <a href="#beranda" onclick="closeNav()">Beranda</a>
+    <a href="#tentang" onclick="closeNav()">Tentang</a>
+    <a href="#struktur" onclick="closeNav()">Anggota</a>
+    <a href="#program" onclick="closeNav()">Program Kerja</a>
+    <a href="#publikasi" onclick="closeNav()">Publikasi</a>
+    <a href="#galeri" onclick="closeNav()">Galeri</a>
+    <a href="#lokasi" onclick="closeNav()">Lokasi</a>
+    <a href="#kontak" onclick="closeNav()">Kontak</a>
+  </div>
+</nav>
+
+<!-- HERO UTAMA -->
+<header class="hero" id="beranda">
+ <div class="hero-content">
+   <span class="badge">PROGRAM PENGABDIAN MASYARAKAT • 2027</span>
+   <h1>P2M 2027</h1>
+   <h2>MA Plus Al-Ittihaad</h2>
+   <div class="tagline">KOMPAK, BERGERAK, BERDAMPAK</div>
+   
+   <div class="stats-container">
+     <div class="stat-card">
+       <div class="stat-number">69</div>
+       <div class="stat-label">Total Anggota</div>
+     </div>
+     <div class="stat-card">
+       <div class="stat-number">14</div>
+       <div class="stat-label">Divisi Kerja</div>
+     </div>
+   </div>
+   
+   <br>
+   <a class="btn" href="#struktur">Lihat Tim P2M →</a>
+ </div>
+</header>
+
+<!-- SECTION TENTANG -->
+<section class="about-section" id="tentang">
+  <div class="container">
+    <span class="eyebrow">Tentang Kami</span>
+    <h3>Pengabdian Masyarakat P2M 2027</h3>
+    <p class="lead">P2M 2027 adalah kegiatan Pengabdian kepada Masyarakat dari MA Plus Al-Ittihaad yang mengajak siswa untuk belajar, berkolaborasi, dan berkontribusi bagi masyarakat.</p>
+    <div class="about-highlight">Kompak. Bergerak. Berdampak.</div>
+    <p class="lead">Bersama, kami menghadirkan kegiatan positif yang bermanfaat dan meninggalkan kesan bagi masyarakat.</p>
+  </div>
+</section>
+
+<!-- ANGGOTA & KEPENGURUSAN -->
+<section class="team-section" id="struktur">
+ <div class="container">
+  <span class="eyebrow">Struktur Organisasi</span>
+  <h3>Tim P2M MA Plus Al-Ittihaad</h3>
+  <p class="lead" style="margin-bottom:25px;">Geser ke samping dan klik pada divisi untuk melihat anggota.</p>
+  
+  <div class="team-slider">
+
+    <!-- 1. KETUA UMUM -->
+    <div class="team-card">
+      <div class="team-img-box">
+        <img src="ketua_umum.jpg" alt="Muhammad Naufal Ismail">
+      </div>
+      <div class="team-info">
+        <h4>Muhammad Naufal Ismail</h4>
+        <p>Ketua Umum</p>
+      </div>
+    </div>
+
+    <!-- 2. KETUA 1 -->
+    <div class="team-card">
+      <div class="team-img-box">
+        <img src="ketua1.jpg" alt="Rafli Habiburrohman">
+      </div>
+      <div class="team-info">
+        <h4>Rafli Habiburrohman</h4>
+        <p>Ketua 1</p>
+      </div>
+    </div>
+
+    <!-- 3. KETUA 2 -->
+    <div class="team-card">
+      <div class="team-img-box">
+        <img src="ketua2.jpg" alt="Muhammad Ridho Al Baroki">
+      </div>
+      <div class="team-info">
+        <h4>Muhammad Ridho Al Baroki</h4>
+        <p>Ketua 2</p>
+      </div>
+    </div>
+
+    <!-- 4. KETUA 3 -->
+    <div class="team-card">
+      <div class="team-img-box">
+        <img src="ketua3.jpg" alt="Muhammad Azam Maulidan">
+      </div>
+      <div class="team-info">
+        <h4>Muhammad Azam Maulidan</h4>
+        <p>Ketua 3</p>
+      </div>
+    </div>
+
+    <!-- 5. SEKRETARIS -->
+    <div class="team-card clickable" onclick="openModal('sekretaris')">
+      <div class="team-img-box">
+        <img src="sekretaris.jpg" alt="Dana Jaenal Mutakin">
+      </div>
+      <div class="team-info">
+        <h4>Dana Jaenal Mutakin</h4>
+        <p>Sekretaris</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 6. BENDAHARA -->
+    <div class="team-card clickable" onclick="openModal('bendahara')">
+      <div class="team-img-box">
+        <img src="bendahara.jpg" alt="Karin Waladiatul Ramdani">
+      </div>
+      <div class="team-info">
+        <h4>Karin Waladiatul Ramdani</h4>
+        <p>Bendahara</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 7. DIVISI PDD -->
+    <div class="team-card clickable" onclick="openModal('pdd')">
+      <div class="team-img-box">
+        <img src="pdd.jpg" alt="Arshal Dinur Fauzan">
+      </div>
+      <div class="team-info">
+        <h4>Arshal Dinur Fauzan</h4>
+        <p>Divisi PDD</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 8. DIVISI ACARA -->
+    <div class="team-card clickable" onclick="openModal('acara')">
+      <div class="team-img-box">
+        <img src="acara.jpg" alt="Nisa Adila Wardani">
+      </div>
+      <div class="team-info">
+        <h4>Nisa Adila Wardani</h4>
+        <p>Divisi Acara</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 9. DIVISI PERALATAN -->
+    <div class="team-card clickable" onclick="openModal('peralatan')">
+      <div class="team-img-box">
+        <img src="peralatan.jpg" alt="Zia Al-khulaeni">
+      </div>
+      <div class="team-info">
+        <h4>Zia Al-khulaeni</h4>
+        <p>Divisi Peralatan</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 10. DIVISI LOGISTIK -->
+    <div class="team-card clickable" onclick="openModal('logistik')">
+      <div class="team-img-box">
+        <img src="logistik.jpg" alt="Muhammad Akmal Al Fajri">
+      </div>
+      <div class="team-info">
+        <h4>Muhammad Akmal Al Fajri</h4>
+        <p>Divisi Logistik</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 11. DIVISI KEAMANAN -->
+    <div class="team-card clickable" onclick="openModal('keamanan')">
+      <div class="team-img-box">
+        <img src="keamanan.jpg" alt="Indhira Hadi Panca Satria">
+      </div>
+      <div class="team-info">
+        <h4>Indhira Hadi Panca Satria</h4>
+        <p>Divisi Keamanan</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 12. DIVISI KONSUMSI -->
+    <div class="team-card clickable" onclick="openModal('konsumsi')">
+      <div class="team-img-box">
+        <img src="konsumsi.jpg" alt="Rahma Putri Ramadani">
+      </div>
+      <div class="team-info">
+        <h4>Rahma Putri Ramadani</h4>
+        <p>Divisi Konsumsi</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 13. DIVISI TARBIYAH -->
+    <div class="team-card clickable" onclick="openModal('tarbiyah')">
+      <div class="team-img-box">
+        <img src="tarbiyah.jpg" alt="Hilya Majdina">
+      </div>
+      <div class="team-info">
+        <h4>Hilya Majdina</h4>
+        <p>Divisi Tarbiyah</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 14. DIVISI DAKWAH -->
+    <div class="team-card clickable" onclick="openModal('dakwah')">
+      <div class="team-img-box">
+        <img src="dakwah.jpg" alt="Muhammad Azzam Maulidan">
+      </div>
+      <div class="team-info">
+        <h4>Muhammad Azzam Maulidan</h4>
+        <p>Divisi Dakwah</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 15. DIVISI PERMAINAN -->
+    <div class="team-card clickable" onclick="openModal('permainan')">
+      <div class="team-img-box">
+        <img src="permainan.jpg" alt="Difa Mulki">
+      </div>
+      <div class="team-info">
+        <h4>Difa Mulki</h4>
+        <p>Divisi Permainan</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 16. DIVISI PERLOMBAAN -->
+    <div class="team-card clickable" onclick="openModal('perlombaan')">
+      <div class="team-img-box">
+        <img src="perlombaan.jpg" alt="Muhammad Yusfi Ruslan">
+      </div>
+      <div class="team-info">
+        <h4>Muhammad Yusfi Ruslan</h4>
+        <p>Divisi Perlombaan</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 17. DIVISI SOSIAL KEMASYARAKATAN -->
+    <div class="team-card clickable" onclick="openModal('sosmas')">
+      <div class="team-img-box">
+        <img src="sosmas.jpg" alt="Pyckan">
+      </div>
+      <div class="team-info">
+        <h4>Pyckan</h4>
+        <p>Divisi Sosmas</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 18. DIVISI SOSIAL EKONOMI -->
+    <div class="team-card clickable" onclick="openModal('sosek')">
+      <div class="team-img-box">
+        <img src="sosek.jpg" alt="Raisya">
+      </div>
+      <div class="team-info">
+        <h4>Raisya</h4>
+        <p>Divisi Sosek</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 19. DIVISI HUBUNGAN ANTAR LEMBAGA -->
+    <div class="team-card clickable" onclick="openModal('hal')">
+      <div class="team-img-box">
+        <img src="hal.jpg" alt="Dani Muhammad Ridwan">
+      </div>
+      <div class="team-info">
+        <h4>Dani Muhammad Ridwan</h4>
+        <p>Divisi Hub. Antar Lembaga</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 20. DIVISI KESEHATAN -->
+    <div class="team-card clickable" onclick="openModal('kesehatan')">
+      <div class="team-img-box">
+        <img src="kesehatan.jpg" alt="Rahmi">
+      </div>
+      <div class="team-info">
+        <h4>Rahmi</h4>
+        <p>Divisi Kesehatan</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 21. DIVISI KEBERSIHAN -->
+    <div class="team-card clickable" onclick="openModal('kebersihan')">
+      <div class="team-img-box">
+        <img src="kebersihan.jpg" alt="Ryan Sukma Gunardi">
+      </div>
+      <div class="team-info">
+        <h4>Ryan Sukma Gunardi</h4>
+        <p>Divisi Kebersihan</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+    <!-- 22. DIVISI SUPPORT -->
+    <div class="team-card clickable" onclick="openModal('support')">
+      <div class="team-img-box">
+        <img src="support.jpg" alt="Muhammad Raihan Firdaus">
+      </div>
+      <div class="team-info">
+        <h4>Muhammad Raihan Firdaus</h4>
+        <p>Divisi Support</p>
+        <span class="click-hint">👆 Klik untuk lihat anggota</span>
+      </div>
+    </div>
+
+  </div>
+ </div>
+</section>
+
+<!-- PROGRAM KERJA -->
+<section class="info-section" id="program">
+  <div class="container">
+    <span class="eyebrow">Informasi Kegiatan</span>
+    <h3>Program Kerja</h3>
+    <div class="info-grid">
+      <div class="info-box">
+        <h4>📅 Tanggal Pelaksanaan</h4>
+        <p class="placeholder-text">Akan diumumkan kemudian.</p>
+      </div>
+      <div class="info-box">
+        <h4>📋 Agenda & Kegiatan Utama</h4>
+        <p class="placeholder-text">Daftar rincian agenda program kerja akan ditambahkan nanti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIKASI -->
+<section style="background:#fff;" id="publikasi">
+  <div class="container">
+    <span class="eyebrow">Dokumentasi & Berita</span>
+    <h3>Publikasi</h3>
+    <div class="info-box" style="margin-top:20px;">
+      <p class="placeholder-text">Artikel, pamflet, dan pengumuman resmi P2M 2027 akan dipublikasikan di sini.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section class="info-section" id="galeri">
+  <div class="container">
+    <span class="eyebrow">Foto & Video</span>
+    <h3>Galeri Kegiatan</h3>
+    <div class="info-box" style="margin-top:20px;">
+      <p class="placeholder-text">Dokumentasi foto dan video kegiatan P2M 2027 akan diunggah di sini.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOKASI -->
+<section style="background:#fff;" id="lokasi">
+  <div class="container">
+    <span class="eyebrow">Peta & Wilayah</span>
+    <h3>Lokasi Pengabdian</h3>
+    <div class="info-box" style="margin-top:20px;">
+      <h4>📍 Alamat Posko</h4>
+      <p class="placeholder-text">Lokasi desa pengabdian masyarakat akan diumumkan kemudian.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK / INFORMASI KELOMPOK -->
+<section class="contact-section" id="kontak">
+  <div class="container">
+    <span class="eyebrow">Kontak</span>
+    <h3>Informasi Kelompok</h3>
+    <p class="lead" style="margin-bottom:20px;">Silakan sesuaikan kontak di bawah ini</p>
+    
+    <div class="contact-grid">
+      
+      <div class="contact-info-list">
+        <div class="contact-card">
+          <small>Email</small>
+          <strong>p2m.alittihaad@gmail.com</strong>
+        </div>
+        
+        <div class="contact-card">
+          <small>Instagram</small>
+          <strong><a href="https://instagram.com/p2m_ppi104" target="_blank">@p2m_ppi104</a></strong>
+        </div>
+        
+        <div class="contact-card">
+          <small>Alamat Posko</small>
+          <strong>Akan diumumkan kemudian</strong>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan/Saran Anda telah terkirim.');">
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" placeholder="Masukkan nama" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="nama@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Pesan</label>
+          <textarea rows="4" placeholder="Tulis pesan atau saran" required></textarea>
+        </div>
+        <button type="submit" class="form-btn">Kirim Pesan</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- POPUP MODALS ANGGOTA -->
+<div class="modal" id="modal-sekretaris"><div class="modal-content"><button class="close-btn" onclick="closeModal('sekretaris')">✕</button><div class="modal-title">Anggota Sekretaris</div><div class="member-list"><div class="member-item"><span>Dhyanisa Mufidah</span></div></div></div></div>
+<div class="modal" id="modal-bendahara"><div class="modal-content"><button class="close-btn" onclick="closeModal('bendahara')">✕</button><div class="modal-title">Anggota Bendahara</div><div class="member-list"><div class="member-item"><span>Zaskia Zahiratannisa Suherman</span></div></div></div></div>
+<div class="modal" id="modal-pdd"><div class="modal-content"><button class="close-btn" onclick="closeModal('pdd')">✕</button><div class="modal-title">Anggota Divisi PDD</div><div class="member-list"><div class="member-item"><span>Sandi Pirmansah</span></div><div class="member-item"><span>M. Al-fauzan</span></div><div class="member-item"><span>Erni Nurwidiyanti</span></div><div class="member-item"><span>Raihana Kansa Aulia</span></div></div></div></div>
+
+<div class="modal" id="modal-acara"><div class="modal-content"><button class="close-btn" onclick="closeModal('acara')">✕</button><div class="modal-title">Anggota Divisi Acara</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-peralatan"><div class="modal-content"><button class="close-btn" onclick="closeModal('peralatan')">✕</button><div class="modal-title">Anggota Divisi Peralatan</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-logistik"><div class="modal-content"><button class="close-btn" onclick="closeModal('logistik')">✕</button><div class="modal-title">Anggota Divisi Logistik</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-keamanan"><div class="modal-content"><button class="close-btn" onclick="closeModal('keamanan')">✕</button><div class="modal-title">Anggota Divisi Keamanan</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-konsumsi"><div class="modal-content"><button class="close-btn" onclick="closeModal('konsumsi')">✕</button><div class="modal-title">Anggota Divisi Konsumsi</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-tarbiyah"><div class="modal-content"><button class="close-btn" onclick="closeModal('tarbiyah')">✕</button><div class="modal-title">Anggota Divisi Tarbiyah</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-dakwah"><div class="modal-content"><button class="close-btn" onclick="closeModal('dakwah')">✕</button><div class="modal-title">Anggota Divisi Dakwah</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-permainan"><div class="modal-content"><button class="close-btn" onclick="closeModal('permainan')">✕</button><div class="modal-title">Anggota Divisi Permainan</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-perlombaan"><div class="modal-content"><button class="close-btn" onclick="closeModal('perlombaan')">✕</button><div class="modal-title">Anggota Divisi Perlombaan</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-sosmas"><div class="modal-content"><button class="close-btn" onclick="closeModal('sosmas')">✕</button><div class="modal-title">Anggota Divisi Sosmas</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-sosek"><div class="modal-content"><button class="close-btn" onclick="closeModal('sosek')">✕</button><div class="modal-title">Anggota Divisi Sosek</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-hal"><div class="modal-content"><button class="close-btn" onclick="closeModal('hal')">✕</button><div class="modal-title">Anggota Divisi Hub. Antar Lembaga</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-kesehatan"><div class="modal-content"><button class="close-btn" onclick="closeModal('kesehatan')">✕</button><div class="modal-title">Anggota Divisi Kesehatan</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-kebersihan"><div class="modal-content"><button class="close-btn" onclick="closeModal('kebersihan')">✕</button><div class="modal-title">Anggota Divisi Kebersihan</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+<div class="modal" id="modal-support"><div class="modal-content"><button class="close-btn" onclick="closeModal('support')">✕</button><div class="modal-title">Anggota Divisi Support</div><div class="member-list"><div class="member-item"><span>[Belum ada data anggota]</span></div></div></div></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+ <div class="footer-inner">
+  <div><strong>P2M 2027 — MA Plus Al-Ittihaad</strong><br><small>Website dokumentasi dan informasi P2M.</small></div>
+  <div><small>© 2027 P2M • Kompak, Bergerak, Berdampak</small></div>
+ </div>
+</footer>
+
+<script>
+const menu = document.getElementById('menu'), nav = document.getElementById('nav');
+menu.addEventListener('click', () => nav.classList.toggle('open'));
+
+function closeNav() {
+  nav.classList.remove('open');
+}
+
+function openModal(id) {
+  const modal = document.getElementById('modal-' + id);
+  if (modal) {
+    modal.classList.add('active');
+  }
+}
+function closeModal(id) {
+  const modal = document.getElementById('modal-' + id);
+  if (modal) {
+    modal.classList.remove('active');
+  }
+}
+</script>
+</body>
+</html>
