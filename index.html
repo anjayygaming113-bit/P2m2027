@@ -53,16 +53,20 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 .about-section{background:var(--cream)}
 .about-highlight{font-size:16px;font-weight:800;color:var(--green);margin:15px 0 10px;letter-spacing:1px}
 
-/* SLIDER ANGGOTA TIM */
+/* SLIDER ANGGOTA TIM (Dioptimalkan agar tidak bug) */
 .team-section{background:#fff}
-.team-slider{display:flex;gap:20px;overflow-x:auto;padding:20px 5px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.team-slider{
+  display:flex;gap:20px;overflow-x:auto;padding:20px 5px;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  will-change:transform;transform:translateZ(0);
+}
 .team-slider::-webkit-scrollbar{height:6px}
 .team-slider::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
-.team-card{flex:0 0 250px;scroll-snap-align:start;background:#fff;border-radius:24px;border:1px solid #e8eee9;box-shadow:0 10px 30px rgba(0,0,0,.05);overflow:hidden;text-align:center;transition:.3s}
+.team-card{flex:0 0 250px;scroll-snap-align:start;background:#fff;border-radius:24px;border:1px solid #e8eee9;box-shadow:0 10px 30px rgba(0,0,0,.05);overflow:hidden;text-align:center;transition:transform .2s ease, box-shadow .2s ease}
 .team-card.clickable{cursor:pointer}
 .team-card.clickable:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(13,92,58,.15)}
 .team-img-box{width:100%;height:270px;background:#e2ece7;position:relative;overflow:hidden}
-.team-img-box img{width:100%;height:100%;object-fit:cover;object-position:top}
+.team-img-box img{width:100%;height:100%;object-fit:cover;object-position:top;loading:lazy}
 .team-info{padding:18px 12px}
 .team-info h4{font-size:16px;color:var(--dark);margin-bottom:4px;font-weight:800}
 .team-info p{font-size:13px;font-weight:700;color:var(--green2)}
@@ -211,7 +215,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 1. KETUA UMUM -->
     <div class="team-card">
       <div class="team-img-box">
-        <img src="ketua_umum.jpg" alt="Muhammad Naufal Ismail">
+        <img src="ketua_umum.jpg" alt="Muhammad Naufal Ismail" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Muhammad Naufal Ismail</h4>
@@ -222,7 +226,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 2. KETUA 1 -->
     <div class="team-card">
       <div class="team-img-box">
-        <img src="ketua1.jpg" alt="Rafli Habiburrohman">
+        <img src="ketua1.jpg" alt="Rafli Habiburrohman" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Rafli Habiburrohman</h4>
@@ -233,7 +237,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 3. KETUA 2 -->
     <div class="team-card">
       <div class="team-img-box">
-        <img src="ketua2.jpg" alt="Muhammad Ridho Al Baroki">
+        <img src="ketua2.jpg" alt="Muhammad Ridho Al Baroki" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Muhammad Ridho Al Baroki</h4>
@@ -244,7 +248,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 4. KETUA 3 -->
     <div class="team-card">
       <div class="team-img-box">
-        <img src="ketua3.jpg" alt="Muhammad Azam Maulidan">
+        <img src="ketua3.jpg" alt="Muhammad Azam Maulidan" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Muhammad Azam Maulidan</h4>
@@ -255,7 +259,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 5. SEKRETARIS -->
     <div class="team-card clickable" onclick="openModal('sekretaris')">
       <div class="team-img-box">
-        <img src="sekretaris.jpg" alt="Dana Jaenal Mutakin">
+        <img src="sekretaris.jpg" alt="Dana Jaenal Mutakin" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Dana Jaenal Mutakin</h4>
@@ -267,7 +271,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 6. BENDAHARA -->
     <div class="team-card clickable" onclick="openModal('bendahara')">
       <div class="team-img-box">
-        <img src="bendahara.jpg" alt="Karin Waladiatul Ramdani">
+        <img src="bendahara.jpg" alt="Karin Waladiatul Ramdani" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Karin Waladiatul Ramdani</h4>
@@ -279,7 +283,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 7. DIVISI PDD -->
     <div class="team-card clickable" onclick="openModal('pdd')">
       <div class="team-img-box">
-        <img src="pdd.jpg" alt="Arshal Dinur Fauzan">
+        <img src="pdd.jpg" alt="Arshal Dinur Fauzan" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Arshal Dinur Fauzan</h4>
@@ -291,7 +295,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 8. DIVISI ACARA -->
     <div class="team-card clickable" onclick="openModal('acara')">
       <div class="team-img-box">
-        <img src="acara.jpg" alt="Nisa Adila Wardani">
+        <img src="acara.jpg" alt="Nisa Adila Wardani" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Nisa Adila Wardani</h4>
@@ -303,7 +307,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 9. DIVISI PERALATAN -->
     <div class="team-card clickable" onclick="openModal('peralatan')">
       <div class="team-img-box">
-        <img src="peralatan.jpg" alt="Zia Al-khulaeni">
+        <img src="peralatan.jpg" alt="Zia Al-khulaeni" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Zia Al-khulaeni</h4>
@@ -315,7 +319,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 10. DIVISI LOGISTIK -->
     <div class="team-card clickable" onclick="openModal('logistik')">
       <div class="team-img-box">
-        <img src="logistik.jpg" alt="Muhammad Akmal Al Fajri">
+        <img src="logistik.jpg" alt="Muhammad Akmal Al Fajri" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Muhammad Akmal Al Fajri</h4>
@@ -327,7 +331,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 11. DIVISI KEAMANAN -->
     <div class="team-card clickable" onclick="openModal('keamanan')">
       <div class="team-img-box">
-        <img src="keamanan.jpg" alt="Indhira Hadi Pancasatria">
+        <img src="keamanan.jpg" alt="Indhira Hadi Pancasatria" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Indhira Hadi Pancasatria</h4>
@@ -339,7 +343,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 12. DIVISI KONSUMSI -->
     <div class="team-card clickable" onclick="openModal('konsumsi')">
       <div class="team-img-box">
-        <img src="konsumsi.jpg" alt="Rahma Putri Ramadani">
+        <img src="konsumsi.jpg" alt="Rahma Putri Ramadani" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Rahma Putri Ramadani</h4>
@@ -351,7 +355,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 13. DIVISI TARBIYAH -->
     <div class="team-card clickable" onclick="openModal('tarbiyah')">
       <div class="team-img-box">
-        <img src="tarbiyah.jpg" alt="Hilya Nadzira Majdina">
+        <img src="tarbiyah.jpg" alt="Hilya Nadzira Majdina" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Hilya Nadzira Majdina</h4>
@@ -363,7 +367,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 14. DIVISI DAKWAH -->
     <div class="team-card clickable" onclick="openModal('dakwah')">
       <div class="team-img-box">
-        <img src="dakwah.jpg" alt="Muhammad Azzam Maulidan">
+        <img src="dakwah.jpg" alt="Muhammad Azzam Maulidan" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Muhammad Azzam Maulidan</h4>
@@ -375,7 +379,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 15. DIVISI PERMAINAN -->
     <div class="team-card clickable" onclick="openModal('permainan')">
       <div class="team-img-box">
-        <img src="permainan.jpg" alt="Difa Mulki Hanifa">
+        <img src="permainan.jpg" alt="Difa Mulki Hanifa" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Difa Mulki Hanifa</h4>
@@ -387,7 +391,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 16. DIVISI PERLOMBAAN -->
     <div class="team-card clickable" onclick="openModal('perlombaan')">
       <div class="team-img-box">
-        <img src="perlombaan.jpg" alt="Yusfi Ruslan Atsaury">
+        <img src="perlombaan.jpg" alt="Yusfi Ruslan Atsaury" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Yusfi Ruslan Atsaury</h4>
@@ -399,7 +403,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 17. DIVISI SOSIAL KEMASYARAKATAN -->
     <div class="team-card clickable" onclick="openModal('sosmas')">
       <div class="team-img-box">
-        <img src="sosmas.jpg" alt="Pyckan Ramadania Putri">
+        <img src="sosmas.jpg" alt="Pyckan Ramadania Putri" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Pyckan Ramadania Putri</h4>
@@ -411,7 +415,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 18. DIVISI SOSIAL EKONOMI -->
     <div class="team-card clickable" onclick="openModal('sosek')">
       <div class="team-img-box">
-        <img src="sosek.jpg" alt="Raisa Musakinah">
+        <img src="sosek.jpg" alt="Raisa Musakinah" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Raisa Musakinah</h4>
@@ -423,7 +427,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 19. DIVISI HUBUNGAN ANTAR LEMBAGA -->
     <div class="team-card clickable" onclick="openModal('hal')">
       <div class="team-img-box">
-        <img src="hal.jpg" alt="Dani Muhammad Ridwan">
+        <img src="hal.jpg" alt="Dani Muhammad Ridwan" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Dani Muhammad Ridwan</h4>
@@ -435,7 +439,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 20. DIVISI KESEHATAN -->
     <div class="team-card clickable" onclick="openModal('kesehatan')">
       <div class="team-img-box">
-        <img src="kesehatan.jpg" alt="Rahmi Lestari S.M">
+        <img src="kesehatan.jpg" alt="Rahmi Lestari S.M" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Rahmi Lestari S.M</h4>
@@ -447,7 +451,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 21. DIVISI KEBERSIHAN -->
     <div class="team-card clickable" onclick="openModal('kebersihan')">
       <div class="team-img-box">
-        <img src="kebersihan.jpg" alt="Ryan Sukma Gunardi">
+        <img src="kebersihan.jpg" alt="Ryan Sukma Gunardi" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Ryan Sukma Gunardi</h4>
@@ -459,7 +463,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <!-- 22. DIVISI SUPPORT -->
     <div class="team-card clickable" onclick="openModal('support')">
       <div class="team-img-box">
-        <img src="support.jpg" alt="Muhammad Raihan Firdaus Al-anwari">
+        <img src="support.jpg" alt="Muhammad Raihan Firdaus Al-anwari" loading="lazy">
       </div>
       <div class="team-info">
         <h4>Muhammad Raihan Firdaus</h4>
@@ -581,19 +585,19 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
     <div class="modal-title">Anggota Divisi PDD</div>
     <div class="member-list">
       <div class="member-item">
-        <img src="pdd_sandi.jpg" alt="Sandi Pirmansah">
+        <img src="pdd_sandi.jpg" alt="Sandi Pirmansah" loading="lazy">
         <span>Sandi Pirmansah</span>
       </div>
       <div class="member-item">
-        <img src="pdd_fauzan.jpg" alt="M. Al-fauzan">
+        <img src="pdd_fauzan.jpg" alt="M. Al-fauzan" loading="lazy">
         <span>M. Al-fauzan</span>
       </div>
       <div class="member-item">
-        <img src="pdd_erni.jpg" alt="Erni Nurwidiyanti">
+        <img src="pdd_erni.jpg" alt="Erni Nurwidiyanti" loading="lazy">
         <span>Erni Nurwidiyanti</span>
       </div>
       <div class="member-item">
-        <img src="pdd_raihana.jpg" alt="Raihana Kansa Aulia">
+        <img src="pdd_raihana.jpg" alt="Raihana Kansa Aulia" loading="lazy">
         <span>Raihana Kansa Aulia</span>
       </div>
     </div>
