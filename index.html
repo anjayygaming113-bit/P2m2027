@@ -11,53 +11,61 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fff;line-height:1.6;position:relative;overflow-x:hidden}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#ffffff;line-height:1.6;position:relative;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 
-/* LATAR BELAKANG BULATAN BERGERAK (BLOBS) */
+/* BULATAN BIRU & WARNA-WARNI BERGERAK DI BACKGROUND */
 .bg-blobs {
   position: fixed;
-  inset: 0;
-  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #ffffff;
 }
 .blob {
   position: absolute;
-  filter: blur(60px);
-  opacity: 0.45;
+  filter: blur(50px);
+  opacity: 0.6;
   border-radius: 50%;
-  animation: floatBlob 12s infinite alternate ease-in-out;
+  animation: floatBlob 10s infinite alternate ease-in-out;
 }
 .blob-1 {
-  width: 280px;
-  height: 280px;
-  background: rgba(13, 92, 58, 0.25);
-  top: -50px;
-  left: -50px;
+  width: 300px;
+  height: 300px;
+  background: rgba(13, 92, 58, 0.3);
+  top: 5%;
+  left: 5%;
 }
 .blob-2 {
-  width: 320px;
-  height: 320px;
-  background: rgba(30, 144, 255, 0.22); /* Bulatan biru */
-  top: 30%;
-  right: -80px;
-  animation-delay: -4s;
+  width: 350px;
+  height: 350px;
+  background: rgba(0, 150, 255, 0.5); /* Warna biru terang agar jelas */
+  top: 40%;
+  right: 5%;
+  animation-delay: -3s;
 }
 .blob-3 {
-  width: 260px;
-  height: 260px;
-  background: rgba(201, 168, 78, 0.2);
+  width: 280px;
+  height: 280px;
+  background: rgba(201, 168, 78, 0.4);
   bottom: 10%;
-  left: 20%;
-  animation-delay: -8s;
+  left: 30%;
+  animation-delay: -6s;
 }
 
 @keyframes floatBlob {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, 50px) scale(1.1); }
-  100% { transform: translate(-30px, 30px) scale(0.95); }
+  50% { transform: translate(50px, 60px) scale(1.15); }
+  100% { transform: translate(-40px, 40px) scale(0.9); }
+}
+
+/* MENJAGA KONTEN AGAR TETAP DI ATAS BACKGROUND */
+header, section, footer, nav {
+  position: relative;
+  z-index: 2;
 }
 
 /* NAVIGASI */
@@ -219,7 +227,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </head>
 <body>
 
-<!-- LATAR BELAKANG BULATAN BERGERAK (BLOBS) -->
+<!-- BULATAN BIRU & WARNA-WARNI BERGERAK DI BACKGROUND -->
 <div class="bg-blobs">
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
@@ -761,7 +769,7 @@ function showPhoto(name, imgSrc) {
 }
 
 // Fungsi untuk menutup modal foto besar
-closePhotoModal = function() {
+function closePhotoModal() {
   document.getElementById('photo-modal').classList.remove('active');
 }
 
