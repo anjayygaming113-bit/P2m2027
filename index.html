@@ -14,58 +14,52 @@ html{scroll-behavior:smooth}
 body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#ffffff;line-height:1.6;position:relative;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 
-/* BULATAN BIRU & WARNA-WARNI BERGERAK DI BACKGROUND */
+/* BULATAN BIRU BERGERAK DI LAPISAN PALING ATAS */
 .bg-blobs {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: 999; /* Lapisan paling atas agar tidak tertimpa */
   overflow: hidden;
-  pointer-events: none;
+  pointer-events: none; /* Membuat bulatan tembus klik, jadi tombol tetap bisa ditekan */
 }
 .blob {
   position: absolute;
-  filter: blur(50px);
-  opacity: 0.6;
+  filter: blur(60px);
+  opacity: 0.35; /* Transparan lembut */
   border-radius: 50%;
-  animation: floatBlob 10s infinite alternate ease-in-out;
+  animation: floatBlob 12s infinite alternate ease-in-out;
 }
 .blob-1 {
   width: 300px;
   height: 300px;
   background: rgba(13, 92, 58, 0.3);
-  top: 5%;
+  top: 10%;
   left: 5%;
 }
 .blob-2 {
   width: 350px;
   height: 350px;
-  background: rgba(0, 150, 255, 0.5); /* Warna biru terang agar jelas */
-  top: 40%;
+  background: rgba(0, 140, 255, 0.45); /* Bulatan biru terang */
+  top: 35%;
   right: 5%;
-  animation-delay: -3s;
+  animation-delay: -4s;
 }
 .blob-3 {
   width: 280px;
   height: 280px;
-  background: rgba(201, 168, 78, 0.4);
-  bottom: 10%;
-  left: 30%;
-  animation-delay: -6s;
+  background: rgba(201, 168, 78, 0.35);
+  bottom: 15%;
+  left: 20%;
+  animation-delay: -8s;
 }
 
 @keyframes floatBlob {
   0% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(50px, 60px) scale(1.15); }
   100% { transform: translate(-40px, 40px) scale(0.9); }
-}
-
-/* MENJAGA KONTEN AGAR TETAP DI ATAS BACKGROUND */
-header, section, footer, nav {
-  position: relative;
-  z-index: 2;
 }
 
 /* NAVIGASI */
@@ -181,7 +175,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 
 /* POPUP MODAL ANGGOTA DENGAN ANIMASI KEREN */
 .modal{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:100;
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1000;
   align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);
   opacity:0;transition:opacity .35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -227,7 +221,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </head>
 <body>
 
-<!-- BULATAN BIRU & WARNA-WARNI BERGERAK DI BACKGROUND -->
+<!-- BULATAN BIRU BERGERAK DI LAPISAN PALING ATAS -->
 <div class="bg-blobs">
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
@@ -708,7 +702,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 </div>
 
 <!-- MODAL LIGHTBOX FOTO BESAR KHUSUS -->
-<div class="modal" id="photo-modal" style="z-index: 110;">
+<div class="modal" id="photo-modal" style="z-index: 1100;">
   <div class="modal-content" style="text-align:center; max-width: 360px;">
     <button class="close-btn" onclick="closePhotoModal()">✕</button>
     <div class="modal-title" id="photo-title" style="margin-bottom: 15px;">Foto Anggota</div>
