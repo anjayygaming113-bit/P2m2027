@@ -9,7 +9,7 @@
   --green:#0d5c3a; --green2:#14734a; --cream:#f7f3e8; --gold:#c9a84e;
   --dark:#123127; --white:#fff; --muted:#66756e; --shadow:0 16px 45px rgba(10,45,30,.12);
 }
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color: transparent;}
 html{scroll-behavior:smooth}
 body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fff;line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
@@ -86,20 +86,35 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
 .about-section{background:var(--cream)}
 .about-highlight{font-size:16px;font-weight:800;color:var(--green);margin:15px 0 10px;letter-spacing:1px}
 
-/* SLIDER ANGGOTA TIM */
+/* SLIDER TIM P2M DENGAN ANIMASI HIDUP BERDENYUT */
 .team-section{background:#fff}
 .team-slider{
-  display:flex;gap:20px;overflow-x:auto;padding:20px 5px;
+  display:flex;gap:20px;overflow-x:auto;padding:25px 5px;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
 }
 .team-slider::-webkit-scrollbar{height:6px}
 .team-slider::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
-.team-card{flex:0 0 250px;scroll-snap-align:start;background:#fff;border-radius:24px;border:1px solid #e8eee9;box-shadow:0 10px 30px rgba(0,0,0,.04);overflow:hidden;text-align:center;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1)}
+
+/* ANIMASI KARTU TIM BERGERAK HIDUP BERGANTIAN */
+.team-card{
+  flex:0 0 250px;scroll-snap-align:start;background:#fff;border-radius:24px;
+  border:1px solid #e8eee9;box-shadow:0 10px 30px rgba(0,0,0,.05);overflow:hidden;
+  text-align:center;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: cardFloating 5s infinite ease-in-out;
+}
+.team-card:nth-child(even) {
+  animation-delay: 2.5s; /* Membuat gerakan naik turunnya tidak bersamaan agar lebih natural */
+}
+@keyframes cardFloating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
 .team-card.clickable{cursor:pointer}
-.team-card.clickable:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(13,92,58,.18);border-color:var(--green2)}
+.team-card.clickable:hover{transform:translateY(-12px) scale(1.02);box-shadow:0 20px 40px rgba(13,92,58,.2);border-color:var(--green2);animation-play-state: paused;}
 .team-img-box{width:100%;height:270px;background:#e2ece7;position:relative;overflow:hidden}
 .team-img-box img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .4s}
-.team-card:hover .team-img-box img{transform:scale(1.05)}
+.team-card:hover .team-img-box img{transform:scale(1.06)}
 .team-info{padding:18px 12px}
 .team-info h4{font-size:16px;color:var(--dark);margin-bottom:4px;font-weight:800}
 .team-info p{font-size:13px;font-weight:700;color:var(--green2)}
