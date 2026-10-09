@@ -13,7 +13,6 @@
 body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#f4f7f5;line-height:1.6}
 a{text-decoration:none;color:inherit}
 
-/* LAYOUT ADMIN */
 .admin-container{display:flex;min-height:100vh}
 .sidebar{width:260px;background:var(--dark);color:#fff;padding:25px 20px;position:fixed;height:100%;overflow-y:auto}
 .sidebar h2{font-size:18px;color:var(--gold);margin-bottom:30px;letter-spacing:1px}
@@ -26,35 +25,20 @@ a{text-decoration:none;color:inherit}
 .header-top h1{font-size:22px;color:var(--green)}
 .back-site{font-size:13px;font-weight:700;background:var(--cream);color:var(--green);padding:8px 16px;border-radius:10px;border:1px solid #ebdcc4}
 
-/* KARTU STATISTIK */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:30px}
-.stat-box{background:#fff;padding:20px 25px;border-radius:20px;box-shadow:0 5px 20px rgba(0,0,0,.04);border-left:5px solid var(--green)}
-.stat-box.gold{border-left-color:var(--gold)}
-.stat-box small{color:var(--muted);font-weight:700;font-size:12px;text-transform:uppercase}
-.stat-box h3{font-size:26px;color:var(--dark);margin-top:5px}
-
-/* FORM / KOTAK KELOLA */
 .admin-card{background:#fff;padding:30px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.04);margin-bottom:30px}
 .admin-card h3{font-size:18px;color:var(--green);margin-bottom:20px;border-bottom:2px solid var(--cream);padding-bottom:10px}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:20px}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--dark)}
-.form-group input, .form-group select, .form-group textarea{
-  width:100%;padding:12px 16px;border:1px solid #dce6e0;border-radius:12px;
-  font-family:inherit;font-size:14px;background:#f9fbf9;outline:none;transition:border-color .2s
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus{border-color:var(--green2)}
-.btn-save{padding:12px 24px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer;transition:background .2s}
+.form-group input, .form-group select, .form-group textarea{width:100%;padding:12px 16px;border:1px solid #dce6e0;border-radius:12px;font-family:inherit;font-size:14px;background:#f9fbf9;outline:none;}
+.btn-save{padding:12px 24px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer;}
 .btn-save:hover{background:var(--green2)}
 
-/* TABEL DAFTAR ANGGOTA */
-.table-responsive{overflow-x:auto}
 table{width:100%;border-collapse:collapse;margin-top:10px}
 th, td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
 th{background:#f9fbf9;color:var(--green);font-weight:800}
-td img{width:40px;height:40px;object-fit:cover;border-radius:8px;border:1px solid #ddd}
+td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
 .action-btns{display:flex;gap:8px}
-.btn-edit{background:var(--gold);color:#123127;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
 .btn-del{background:var(--danger);color:#fff;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
 
 @media(max-width:800px){
@@ -67,276 +51,110 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;border:1px soli
 <body>
 
 <div class="admin-container">
-  <!-- SIDEBAR ADMIN -->
   <aside class="sidebar">
     <h2>P2M 2027 ADMIN</h2>
     <div class="sidebar-menu">
-      <a href="#" class="active">📊 Beranda Admin</a>
-      <a href="#tambah-anggota">➕ Tambah Anggota</a>
-      <a href="#daftar-anggota">✏️ Edit / Koreksi Data</a>
-      <a href="#kelola-publikasi">📰 Publikasi Harian</a>
-      <a href="#kelola-galeri">🖼️ Galeri Angkatan</a>
-      <a href="index.html" style="margin-top:40px; color:#f8e8af;">← Kembali ke Website</a>
+      <a href="#" class="active">📊 Dashboard Utama</a>
+      <a href="index.html" style="margin-top:20px; color:#f8e8af;">← Kembali ke Website</a>
     </div>
   </aside>
 
-  <!-- KONTEN UTAMA ADMIN -->
   <main class="main-content">
     <div class="header-top">
-      <h1>Dashboard Pengelolaan Website</h1>
+      <h1>Dashboard Kelola Anggota P2M</h1>
       <a href="index.html" class="back-site" target="_blank">Lihat Website Live ↗</a>
     </div>
 
-    <!-- STATISTIK RINGKAS -->
-    <div class="stats-grid">
-      <div class="stat-box">
-        <small>Total Anggota Terdaftar</small>
-        <h3>69 Orang</h3>
-      </div>
-      <div class="stat-box gold">
-        <small>Total Divisi Kerja</small>
-        <h3>14 Divisi</h3>
-      </div>
-      <div class="stat-box">
-        <small>Dokumentasi Publikasi</small>
-        <h3>2 Hari</h3>
-      </div>
-    </div>
-
-    <!-- 1. TAMBAH ANGGOTA / DIVISI BARU -->
-    <div class="admin-card" id="tambah-anggota">
-      <h3>Tambah Anggota atau Pengurus Baru</h3>
-      <form onsubmit="event.preventDefault(); alert('Anggota baru berhasil ditambahkan!');">
+    <!-- TAMBAH PENGURUS UTAMA -->
+    <div class="admin-card">
+      <h3>Tambah Kartu Pengurus / Divisi Utama</h3>
+      <form id="add-team-form">
         <div class="form-grid">
-          <div class="form-group">
-            <label>Nama Lengkap</label>
-            <input type="text" placeholder="Contoh: Sandi Pirmansah" required>
-          </div>
-          <div class="form-group">
-            <label>Pilih Posisi / Divisi</label>
-            <select>
-              <option>Ketua Umum</option>
-              <option>Ketua 1</option>
-              <option>Ketua 2</option>
-              <option>Ketua 3</option>
-              <option>Sekretaris</option>
-              <option>Bendahara</option>
-              <option>Divisi PDD</option>
-              <option>Divisi Acara</option>
-              <option>Divisi Peralatan</option>
-              <option>Divisi Logistik</option>
-              <option>Divisi Keamanan</option>
-              <option>Divisi Konsumsi</option>
-              <option>Divisi Tarbiyah</option>
-              <option>Divisi Dakwah</option>
-              <option>Divisi Permainan</option>
-              <option>Divisi Perlombaan</option>
-              <option>Divisi Sosial Kemasyarakatan (Sosmas)</option>
-              <option>Divisi Sosial Ekonomi (Sosek)</option>
-              <option>Divisi Hubungan Antar Lembaga (HAL)</option>
-              <option>Divisi Kesehatan</option>
-              <option>Divisi Kebersihan</option>
-              <option>Divisi Support</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Unggah Foto (.jpg)</label>
-            <input type="file" accept="image/*" required>
-          </div>
+          <div class="form-group"><label>Nama Lengkap</label><input type="text" id="add-name" required></div>
+          <div class="form-group"><label>Jabatan / Divisi</label><input type="text" id="add-role" placeholder="Contoh: Ketua Umum / Divisi PDD" required></div>
+          <div class="form-group"><label>Nama File Foto (.jpg)</label><input type="text" id="add-img" placeholder="Contoh: ketua_umum.jpg" required></div>
         </div>
-        <button type="submit" class="btn-save">Simpan Anggota Baru</button>
+        <button type="submit" class="btn-save">Tambah Kartu Tim</button>
       </form>
     </div>
 
-    <!-- 2. TABEL KOREKSI / EDIT DATA ANGGOTA -->
-    <div class="admin-card" id="daftar-anggota">
-      <h3>Daftar & Koreksi Anggota (Edit Nama, Divisi, atau Foto)</h3>
-      <p style="font-size: 13px; color: var(--muted); margin-bottom: 15px;">Daftar lengkap pengurus dan penanggung jawab utama P2M 2027.</p>
-      
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>Foto</th>
-              <th>Nama Lengkap</th>
-              <th>Divisi / Jabatan</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><img src="ketua_umum.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Muhammad Naufal Ismail</td>
-              <td>Ketua Umum</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data Ketua Umum')">Edit</button><button class="btn-del" onclick="alert('Hapus data')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="ketua1.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Rafli Habiburrohman</td>
-              <td>Ketua 1</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="ketua2.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Muhammad Ridho Al Baroki</td>
-              <td>Ketua 2</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="ketua3.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Muhammad Azam Maulidan</td>
-              <td>Ketua 3</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="sekretaris.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Dana Jaenal Mutakin</td>
-              <td>Sekretaris</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="bendahara.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Karin Waladiatul Ramdani</td>
-              <td>Bendahara</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="pdd.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Arshal Dinur Fauzan</td>
-              <td>Divisi PDD</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="acara.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Nisa Adila Wardani</td>
-              <td>Divisi Acara</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="peralatan.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Zia Al-khulaeni</td>
-              <td>Divisi Peralatan</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="logistik.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Muhammad Akmal Al Fajri</td>
-              <td>Divisi Logistik</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="keamanan.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Indhira Hadi Pancasatria</td>
-              <td>Divisi Keamanan</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="konsumsi.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Rahma Putri Ramadani</td>
-              <td>Divisi Konsumsi</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="tarbiyah.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Hilya Nadzira Majdina</td>
-              <td>Divisi Tarbiyah</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="dakwah.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Muhammad Azzam Maulidan</td>
-              <td>Divisi Dakwah</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="permainan.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Difa Mulki Hanifa</td>
-              <td>Divisi Permainan</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="perlombaan.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Yusfi Ruslan Atsaury</td>
-              <td>Divisi Perlombaan</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="sosmas.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Pyckan Ramadania Putri</td>
-              <td>Divisi Sosmas</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="sosek.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Raisa Musakinah</td>
-              <td>Divisi Sosek</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="hal.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Dani Muhammad Ridwan</td>
-              <td>Divisi Hub. Antar Lembaga</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="kesehatan.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Rahmi Lestari S.M</td>
-              <td>Divisi Kesehatan</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="kebersihan.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Ryan Sukma Gunardi</td>
-              <td>Divisi Kebersihan</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-            <tr>
-              <td><img src="support.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
-              <td>Muhammad Raihan Firdaus</td>
-              <td>Divisi Support</td>
-              <td><div class="action-btns"><button class="btn-edit" onclick="alert('Edit data')">Edit</button><button class="btn-del" onclick="alert('Hapus')">Hapus</button></div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <!-- TABEL DAFTAR TIM -->
+    <div class="admin-card">
+      <h3>Daftar Pengurus Saat Ini</h3>
+      <table>
+        <thead><tr><th>Foto</th><th>Nama</th><th>Jabatan</th><th>Aksi</th></tr></thead>
+        <tbody id="admin-team-table"></tbody>
+      </table>
     </div>
 
-    <!-- 3. KELOLA PUBLIKASI HARIAN -->
-    <div class="admin-card" id="kelola-publikasi">
-      <h3>Tambah Laporan Publikasi Harian</h3>
-      <form onsubmit="event.preventDefault(); alert('Publikasi berhasil ditambahkan!');">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Judul Kegiatan / Hari</label>
-            <input type="text" placeholder="Contoh: Hari ke-3: Bakti Sosial" required>
-          </div>
-          <div class="form-group">
-            <label>Unggah Foto Dokumentasi</label>
-            <input type="file" accept="image/*" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Deskripsi Singkat Kegiatan</label>
-          <textarea rows="3" placeholder="Tulis ringkasan kegiatan hari ini..."></textarea>
-        </div>
-        <button type="submit" class="btn-save">Terbitkan Publikasi</button>
-      </form>
-    </div>
-
-    <!-- 4. KELOLA GALERI FOTO ANGKATAN -->
-    <div class="admin-card" id="kelola-galeri">
+    <!-- GANTI FOTO UTAMA ANGKATAN -->
+    <div class="admin-card">
       <h3>Perbarui Foto Utama Angkatan XVI</h3>
-      <form onsubmit="event.preventDefault(); alert('Foto angkatan diperbarui!');">
-        <div class="form-group">
-          <label>Unggah Foto Baru Angkatan XVI (angkatan_xvi.jpg)</label>
-          <input type="file" accept="image/*" required>
-        </div>
+      <form id="update-angkatan-form">
+        <div class="form-group"><label>Nama File Foto Angkatan di GitHub (Contoh: angkatan_xvi.jpg)</label><input type="text" id="angkatan-img-input" required></div>
         <button type="submit" class="btn-save">Perbarui Foto Angkatan</button>
       </form>
     </div>
-
   </main>
 </div>
 
+<script>
+const defaultTeam = [
+  {id:'ketua', name:'Muhammad Naufal Ismail', role:'Ketua Umum', img:'ketua_umum.jpg', members:[]},
+  {id:'ketua1', name:'Rafli Habiburrohman', role:'Ketua 1', img:'ketua1.jpg', members:[]},
+  {id:'ketua2', name:'Muhammad Ridho Al Baroki', role:'Ketua 2', img:'ketua2.jpg', members:[]},
+  {id:'ketua3', name:'Muhammad Azam Maulidan', role:'Ketua 3', img:'ketua3.jpg', members:[]},
+  {id:'sekretaris', name:'Dana Jaenal Mutakin', role:'Sekretaris', img:'sekretaris.jpg', members:[{name:'Dana Jaenal Mutakin', img:'sekretaris.jpg'}]},
+  {id:'bendahara', name:'Karin Waladiatul Ramdani', role:'Bendahara', img:'bendahara.jpg', members:[{name:'Karin Waladiatul Ramdani', img:'bendahara.jpg'}]},
+  {id:'pdd', name:'Arshal Dinur Fauzan', role:'Divisi PDD', img:'pdd.jpg', members:[{name:'Sandi Pirmansah', img:'pdd_sandi.jpg'}, {name:'M. Al-fauzan', img:'pdd_fauzan.jpg'}, {name:'Erni Nurwidiyanti', img:'pdd_erni.jpg'}, {name:'Raihana Kansa Aulia', img:'pdd_raihana.jpg'}]},
+  {id:'acara', name:'Nisa Adila Wardani', role:'Divisi Acara', img:'acara.jpg', members:[{name:'Nisa Adila Wardani', img:'acara.jpg'}]}
+];
+
+let teamData = JSON.parse(localStorage.getItem('p2m_team')) || defaultTeam;
+
+function renderAdminTable() {
+  const tbody = document.getElementById('admin-team-table');
+  tbody.innerHTML = '';
+  teamData.forEach((item, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><img src="${item.img}" onerror="this.src='bg.jpg'"></td>
+      <td><b>${item.name}</b></td>
+      <td>${item.role}</td>
+      <td><button class="btn-del" onclick="deleteTeamMember(${index})">Hapus</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById('add-team-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('add-name').value;
+  const role = document.getElementById('add-role').value;
+  const img = document.getElementById('add-img').value;
+  teamData.push({id: 'item_'+Date.now(), name, role, img, members:[]});
+  localStorage.setItem('p2m_team', JSON.stringify(teamData));
+  renderAdminTable();
+  alert('Anggota berhasil ditambahkan!');
+  this.reset();
+});
+
+function deleteTeamMember(index) {
+  if(confirm('Yakin ingin menghapus data ini?')) {
+    teamData.splice(index, 1);
+    localStorage.setItem('p2m_team', JSON.stringify(teamData));
+    renderAdminTable();
+  }
+}
+
+document.getElementById('update-angkatan-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const imgName = document.getElementById('angkatan-img-input').value;
+  localStorage.setItem('p2m_angkatan_img', imgName);
+  alert('Foto Angkatan XVI berhasil diperbarui!');
+});
+
+document.addEventListener('DOMContentLoaded', renderAdminTable);
+</script>
 </body>
 </html>
