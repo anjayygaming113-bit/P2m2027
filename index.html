@@ -252,9 +252,13 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
   <div class="container">
     <span class="eyebrow">Peta & Wilayah</span>
     <h3>Lokasi Pengabdian</h3>
-    <div class="info-box" style="margin-top:20px;">
-      <h4>📍 Alamat Posko & Peta</h4>
-      <p id="info-lokasi" style="margin-top:5px; font-weight:bold; color:var(--green);">Lokasi desa pengabdian masyarakat akan diumumkan kemudian.</p>
+    <div class="info-box" style="margin-top:20px; padding: 15px;">
+      <h4 style="margin-bottom: 12px;">📍 Peta Posko Lokasi Pengabdian</h4>
+      <div id="map-container" style="width:100%; height:320px; border-radius:16px; overflow:hidden; background:#e2ece7;">
+        <!-- Google Maps Interaktif Asli -->
+        <iframe id="google-map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.898860714777!2d107.8281!3d-7.3195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTknMTAuMiJTIDEwN8KwNDknNDEuMiJF!5e0!3m2!1sid!2sid!4v1650000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <p id="info-lokasi" style="margin-top:12px; font-weight:bold; color:var(--green); text-align:center;">MA Plus Al-Ittihaad / Lokasi Posko P2M 2027</p>
     </div>
   </div>
 </section>
@@ -311,24 +315,24 @@ const defaultTeam = [
   {id:'ketua1', name:'Rafli Habiburrohman', role:'Ketua 1', img:'ketua1.jpg', members:[]},
   {id:'ketua2', name:'Muhammad Ridho Al Baroki', role:'Ketua 2', img:'ketua2.jpg', members:[]},
   {id:'ketua3', name:'Muhammad Azam Maulidan', role:'Ketua 3', img:'ketua3.jpg', members:[]},
-  {id:'sekretaris', name:'Dana Jaenal Mutakin', role:'Sekretaris', img:'sekretaris.jpg', members:[{name:'Dana Jaenal Mutakin', img:'sekretaris.jpg'}]},
-  {id:'bendahara', name:'Karin Waladiatul Ramdani', role:'Bendahara', img:'bendahara.jpg', members:[{name:'Karin Waladiatul Ramdani', img:'bendahara.jpg'}]},
+  {id:'sekretaris', name:'Dana Jaenal Mutakin', role:'Sekretaris', img:'sekretaris.jpg', members:[]},
+  {id:'bendahara', name:'Karin Waladiatul Ramdani', role:'Bendahara', img:'bendahara.jpg', members:[]},
   {id:'pdd', name:'Arshal Dinur Fauzan', role:'Divisi PDD', img:'pdd.jpg', members:[{name:'Sandi Pirmansah', img:'pdd_sandi.jpg'}, {name:'M. Al-fauzan', img:'pdd_fauzan.jpg'}, {name:'Erni Nurwidiyanti', img:'pdd_erni.jpg'}, {name:'Raihana Kansa Aulia', img:'pdd_raihana.jpg'}]},
-  {id:'acara', name:'Nisa Adila Wardani', role:'Divisi Acara', img:'acara.jpg', members:[{name:'Nisa Adila Wardani', img:'acara.jpg'}]},
-  {id:'peralatan', name:'Zia Al-khulaeni', role:'Divisi Peralatan', img:'peralatan.jpg', members:[{name:'Zia Al-khulaeni', img:'peralatan.jpg'}]},
-  {id:'logistik', name:'Muhammad Akmal Al Fajri', role:'Divisi Logistik', img:'logistik.jpg', members:[{name:'Muhammad Akmal Al Fajri', img:'logistik.jpg'}]},
-  {id:'keamanan', name:'Indhira Hadi Pancasatria', role:'Divisi Keamanan', img:'keamanan.jpg', members:[{name:'Indhira Hadi Pancasatria', img:'keamanan.jpg'}]},
-  {id:'konsumsi', name:'Rahma Putri Ramadani', role:'Divisi Konsumsi', img:'konsumsi.jpg', members:[{name:'Rahma Putri Ramadani', img:'konsumsi.jpg'}]},
-  {id:'tarbiyah', name:'Hilya Nadzira Majdina', role:'Divisi Tarbiyah', img:'tarbiyah.jpg', members:[{name:'Hilya Nadzira Majdina', img:'tarbiyah.jpg'}]},
-  {id:'dakwah', name:'Muhammad Azzam Maulidan', role:'Divisi Dakwah', img:'dakwah.jpg', members:[{name:'Muhammad Azzam Maulidan', img:'dakwah.jpg'}]},
-  {id:'permainan', name:'Difa Mulki Hanifa', role:'Divisi Permainan', img:'permainan.jpg', members:[{name:'Difa Mulki Hanifa', img:'permainan.jpg'}]},
-  {id:'perlombaan', name:'Yusfi Ruslan Atsaury', role:'Divisi Perlombaan', img:'perlombaan.jpg', members:[{name:'Yusfi Ruslan Atsaury', img:'perlombaan.jpg'}]},
-  {id:'sosmas', name:'Pyckan Ramadania Putri', role:'Divisi Sosmas', img:'sosmas.jpg', members:[{name:'Pyckan Ramadania Putri', img:'sosmas.jpg'}]},
-  {id:'sosek', name:'Raisa Musakinah', role:'Divisi Sosek', img:'sosek.jpg', members:[{name:'Raisa Musakinah', img:'sosek.jpg'}]},
-  {id:'hal', name:'Dani Muhammad Ridwan', role:'Divisi Hub. Antar Lembaga', img:'hal.jpg', members:[{name:'Dani Muhammad Ridwan', img:'hal.jpg'}]},
-  {id:'kesehatan', name:'Rahmi Lestari S.M', role:'Divisi Kesehatan', img:'kesehatan.jpg', members:[{name:'Rahmi Lestari S.M', img:'kesehatan.jpg'}]},
-  {id:'kebersihan', name:'Ryan Sukma Gunardi', role:'Divisi Kebersihan', img:'kebersihan.jpg', members:[{name:'Ryan Sukma Gunardi', img:'kebersihan.jpg'}]},
-  {id:'support', name:'Muhammad Raihan Firdaus', role:'Divisi Support', img:'support.jpg', members:[{name:'Muhammad Raihan Firdaus', img:'support.jpg'}]}
+  {id:'acara', name:'Nisa Adila Wardani', role:'Divisi Acara', img:'acara.jpg', members:[]},
+  {id:'peralatan', name:'Zia Al-khulaeni', role:'Divisi Peralatan', img:'peralatan.jpg', members:[]},
+  {id:'logistik', name:'Muhammad Akmal Al Fajri', role:'Divisi Logistik', img:'logistik.jpg', members:[]},
+  {id:'keamanan', name:'Indhira Hadi Pancasatria', role:'Divisi Keamanan', img:'keamanan.jpg', members:[]},
+  {id:'konsumsi', name:'Rahma Putri Ramadani', role:'Divisi Konsumsi', img:'konsumsi.jpg', members:[]},
+  {id:'tarbiyah', name:'Hilya Nadzira Majdina', role:'Divisi Tarbiyah', img:'tarbiyah.jpg', members:[]},
+  {id:'dakwah', name:'Muhammad Azzam Maulidan', role:'Divisi Dakwah', img:'dakwah.jpg', members:[]},
+  {id:'permainan', name:'Difa Mulki Hanifa', role:'Divisi Permainan', img:'permainan.jpg', members:[]},
+  {id:'perlombaan', name:'Yusfi Ruslan Atsaury', role:'Divisi Perlombaan', img:'perlombaan.jpg', members:[]},
+  {id:'sosmas', name:'Pyckan Ramadania Putri', role:'Divisi Sosmas', img:'sosmas.jpg', members:[]},
+  {id:'sosek', name:'Raisa Musakinah', role:'Divisi Sosek', img:'sosek.jpg', members:[]},
+  {id:'hal', name:'Dani Muhammad Ridwan', role:'Divisi Hub. Antar Lembaga', img:'hal.jpg', members:[]},
+  {id:'kesehatan', name:'Rahmi Lestari S.M', role:'Divisi Kesehatan', img:'kesehatan.jpg', members:[]},
+  {id:'kebersihan', name:'Ryan Sukma Gunardi', role:'Divisi Kebersihan', img:'kebersihan.jpg', members:[]},
+  {id:'support', name:'Muhammad Raihan Firdaus', role:'Divisi Support', img:'support.jpg', members:[]}
 ];
 
 let teamData = JSON.parse(localStorage.getItem('p2m_team')) || defaultTeam;
@@ -382,7 +386,6 @@ window.addEventListener('click', (e) => {
 document.addEventListener("DOMContentLoaded", function() {
   renderTeam();
   
-  // Ambil Data Kustom dari LocalStorage Admin
   const savedAngkatan = localStorage.getItem('p2m_angkatan_img');
   if(savedAngkatan) { document.getElementById('main-angkatan-img').src = savedAngkatan; }
 
@@ -392,8 +395,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const savedAgenda = localStorage.getItem('p2m_agenda');
   if(savedAgenda) { document.getElementById('info-agenda').innerText = savedAgenda; }
 
-  const savedLokasi = localStorage.getItem('p2m_lokasi');
-  if(savedLokasi) { document.getElementById('info-lokasi').innerText = savedLokasi; }
+  const savedLokasiText = localStorage.getItem('p2m_lokasi_text');
+  if(savedLokasiText) { document.getElementById('info-lokasi').innerText = savedLokasiText; }
+
+  const savedMapUrl = localStorage.getItem('p2m_map_url');
+  if(savedMapUrl) { document.getElementById('google-map-frame').src = savedMapUrl; }
 
   const savedPublikasi = JSON.parse(localStorage.getItem('p2m_publikasi'));
   if(savedPublikasi && savedPublikasi.length > 0) {
