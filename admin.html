@@ -79,7 +79,7 @@ td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px soli
         <h3>Edit Teks Halaman Utama (Tentang & Kontak)</h3>
         <form id="update-texts-form">
           <div class="form-group"><label>Tagline / Slogan di Banner</label><input type="text" id="edit-tagline" value="KOMPAK, BERGERAK, BERDAMPAK" required></div>
-          <div class="form-group"><label>Deskripsi Tentang Kami</label><textarea id="edit-tentang" rows="3" required></textarea></div>
+          <div class="form-group"><label>Deskripsi Tentang Kami</label><textarea id="edit-tentang" rows="3" required>P2M 2027 adalah kegiatan Program Pengabdian kepada Masyarakat dari MA Plus Al-Ittihaad yang mengajak siswa untuk belajar, berkolaborasi, dan berkontribusi bagi masyarakat.</textarea></div>
           <div class="form-grid">
             <div class="form-group"><label>Email Kelompok</label><input type="email" id="edit-email" value="p2m.alittihaad@gmail.com" required></div>
             <div class="form-group"><label>Instagram Kelompok</label><input type="text" id="edit-ig" value="@p2m_ppi104" required></div>
@@ -173,20 +173,20 @@ td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px soli
     <!-- TAB 6: KELOLA GOOGLE MAPS -->
     <div id="section-lokasi" class="admin-section">
       <div class="admin-card">
-        <h3>Kelola Peta Google Maps Posko</h3>
+        <h3>Kelola Peta Lokasi Posko (Presisi)</h3>
         <p style="font-size: 13px; color: var(--muted); margin-bottom: 15px;">
-          Cara ambil link: Buka Google Maps di HP/Laptop -> Cari lokasi posko -> Ketuk <b>Bagikan (Share)</b> -> Pilih <b>Sematkan peta (Embed a map)</b> -> Salin kode HTML-nya, lalu paste link di dalam tanda kutip <code>src="..."</code> ke kotak di bawah ini.
+          Ketik nama lokasi atau pesantren posko agar peta langsung terfokus secara akurat.
         </p>
         <form id="update-map-form">
           <div class="form-group">
-            <label>Link URL Google Maps (src=...)</label>
-            <textarea id="edit-map-url" rows="4" placeholder="Contoh: https://www.google.com/maps/embed?pb=..." required></textarea>
+            <label>Nama Tempat / Alamat Pencarian di Maps</label>
+            <input type="text" id="edit-map-query" value="Pesantren Persatuan Islam 104 Cikajang Garut" required>
           </div>
           <div class="form-group">
-            <label>Keterangan Nama Lokasi / Posko</label>
-            <input type="text" id="edit-lokasi-text" value="MA Plus Al-Ittihaad / Lokasi Posko P2M 2027" required>
+            <label>Keterangan Teks Lokasi di Bawah Peta</label>
+            <input type="text" id="edit-lokasi-text" value="Pesantren Persatuan Islam 104 (PPI 104) Cikajang, Garut" required>
           </div>
-          <button type="submit" class="btn-save">Simpan Peta Google Maps</button>
+          <button type="submit" class="btn-save">Simpan Pengaturan Peta</button>
         </form>
       </div>
     </div>
@@ -406,15 +406,12 @@ document.getElementById('add-pub-form').addEventListener('submit', function(e) {
 
 document.getElementById('update-map-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  let mapVal = document.getElementById('edit-map-url').value.trim();
-  // Jika user tidak sengaja paste seluruh tag iframe, ambil bagian src-nya saja
-  if(mapVal.includes('src="')) {
-    let match = mapVal.match(/src="([^"]+)"/);
-    if(match) mapVal = match[1];
-  }
-  localStorage.setItem('p2m_map_url', mapVal);
+  const query = document.getElementById('edit-map-query').value.trim();
+  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
+  
+  localStorage.setItem('p2m_map_url', mapUrl);
   localStorage.setItem('p2m_lokasi_text', document.getElementById('edit-lokasi-text').value);
-  alert('Peta Google Maps berhasil diperbarui!');
+  alert('Pengaturan Peta Google Maps berhasil disimpan!');
 });
 
 function resetData() {
@@ -431,7 +428,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if(localStorage.getItem('p2m_tentang')) document.getElementById('edit-tentang').value = localStorage.getItem('p2m_tentang');
   if(localStorage.getItem('p2m_email')) document.getElementById('edit-email').value = localStorage.getItem('p2m_email');
   if(localStorage.getItem('p2m_ig')) document.getElementById('edit-ig').value = localStorage.getItem('p2m_ig');
-  if(localStorage.getItem('p2m_map_url')) document.getElementById('edit-map-url').value = localStorage.getItem('p2m_map_url');
   if(localStorage.getItem('p2m_lokasi_text')) document.getElementById('edit-lokasi-text').value = localStorage.getItem('p2m_lokasi_text');
 });
 </script>
