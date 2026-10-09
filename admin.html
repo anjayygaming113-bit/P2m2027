@@ -74,7 +74,7 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
       </table>
     </div>
 
-    <!-- 2. TAMBAH ANGGOTA / SUB-DIVISI -->
+    <!-- 2. TAMBAH ANGGOTA / SUB-DIVISI (LANGSUNG PILIH DARI GALERI HP) -->
     <div class="admin-card">
       <h3>Tambah Anggota ke dalam Sub-Divisi</h3>
       <form id="add-submember-form">
@@ -101,28 +101,28 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
             </select>
           </div>
           <div class="form-group"><label>Nama Anggota Baru</label><input type="text" id="sub-name" placeholder="Nama anggota..." required></div>
-          <div class="form-group"><label>Nama File Foto</label><input type="text" id="sub-img" placeholder="Nama file foto apa adanya" required></div>
+          <div class="form-group"><label>Pilih Foto dari Galeri HP</label><input type="file" id="sub-img-file" accept="image/*" required></div>
         </div>
         <button type="submit" class="btn-save">Tambah Anggota</button>
       </form>
     </div>
 
-    <!-- 3. FOTO UTAMA ANGKATAN -->
+    <!-- 3. FOTO UTAMA ANGKATAN (LANGSUNG DARI GALERI) -->
     <div class="admin-card">
       <h3>Perbarui Foto Utama Angkatan XVI</h3>
       <form id="update-angkatan-form">
-        <div class="form-group"><label>Nama File Foto Angkatan di GitHub</label><input type="text" id="angkatan-img-input" placeholder="Contoh: angkatan_xvi.jpg" required></div>
+        <div class="form-group"><label>Pilih Foto Angkatan dari Galeri HP</label><input type="file" id="angkatan-img-file" accept="image/*" required></div>
         <button type="submit" class="btn-save">Perbarui Foto Angkatan</button>
       </form>
     </div>
 
-    <!-- 4. FOTO & LAPORAN PUBLIKASI KEGIATAN HARIAN -->
+    <!-- 4. FOTO & PUBLIKASI HARIAN (LANGSUNG DARI GALERI) -->
     <div class="admin-card">
       <h3>Tambah Publikasi / Foto Kegiatan Harian</h3>
       <form id="add-pub-form">
         <div class="form-grid">
           <div class="form-group"><label>Judul Kegiatan / Hari</label><input type="text" id="pub-judul" placeholder="Contoh: Hari ke-2: Kerja Bakti" required></div>
-          <div class="form-group"><label>Nama File Foto Kegiatan</label><input type="text" id="pub-img" placeholder="Contoh: kegiatan2.jpg" required></div>
+          <div class="form-group"><label>Pilih Foto Kegiatan dari Galeri HP</label><input type="file" id="pub-img-file" accept="image/*" required></div>
         </div>
         <div class="form-group"><label>Deskripsi Singkat</label><textarea id="pub-desc" rows="2" placeholder="Tulis ringkasan singkat kegiatan..." required></textarea></div>
         <button type="submit" class="btn-save">Terbitkan Publikasi</button>
@@ -194,12 +194,10 @@ function updateName(index, val) {
   teamData[index].name = val;
   localStorage.setItem('p2m_team', JSON.stringify(teamData));
 }
-
 function updateRole(index, val) {
   teamData[index].role = val;
   localStorage.setItem('p2m_team', JSON.stringify(teamData));
 }
-
 function deleteTeam(index) {
   if(confirm('Yakin ingin menghapus data ini?')) {
     teamData.splice(index, 1);
@@ -208,39 +206,54 @@ function deleteTeam(index) {
   }
 }
 
+// Fungsi Bantu Ubah File Gambar jadi Base64 agar langsung tampil dari HP
+function convertImageToBase64(fileInput, callback) {
+  const file = fileInput.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) { callback(e.target.result); }
+    reader.readAsDataURL(file);
+  }
+}
+
 document.getElementById('add-submember-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const targetId = document.getElementById('sub-divisi-target').value;
   const name = document.getElementById('sub-name').value;
-  const img = document.getElementById('sub-img').value;
+  const fileInput = document.getElementById('sub-img-file');
 
-  const divisi = teamData.find(d => d.id === targetId);
-  if(divisi) {
-    if(!divisi.members) divisi.members = [];
-    divisi.members.push({name, img});
-    localStorage.setItem('p2m_team', JSON.stringify(teamData));
-    alert(`Berhasil menambahkan ${name} ke dalam ${divisi.role}!`);
-    this.reset();
-  }
+  convertImageToBase64(fileInput, function(base64Img) {
+    const divisi = teamData.find(d => d.id === targetId);
+    if(divisi) {
+      if(!divisi.members) divisi.members = [];
+      divisi.members.push({name, img: base64Img});
+      localStorage.setItem('p2m_team', JSON.stringify(teamData));
+      alert(`Berhasil menambahkan ${name} ke dalam ${divisi.role}!`);
+      document.getElementById('add-submember-form').reset();
+    }
+  });
 });
 
 document.getElementById('update-angkatan-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  localStorage.setItem('p2m_angkatan_img', document.getElementById('angkatan-img-input').value);
-  alert('Foto Angkatan XVI diperbarui!');
+  convertImageToBase64(document.getElementById('angkatan-img-file'), function(base64Img) {
+    localStorage.setItem('p2m_angkatan_img', base64Img);
+    alert('Foto Angkatan XVI berhasil diperbarui!');
+    document.getElementById('update-angkatan-form').reset();
+  });
 });
 
 document.getElementById('add-pub-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  let pubs = JSON.parse(localStorage.getItem('p2m_publikasi')) || [];
-  pubs.push({
-    judul: document.getElementById('pub-judul').value,
-    img: document.getElementById('pub-img').value,
-    desc: document.getElementById('pub-desc').value
+  const judul = document.getElementById('pub-judul').value;
+  const desc = document.getElementById('pub-desc').value;
+  convertImageToBase64(document.getElementById('pub-img-file'), function(base64Img) {
+    let pubs = JSON.parse(localStorage.getItem('p2m_publikasi')) || [];
+    pubs.push({judul, img: base64Img, desc});
+    localStorage.setItem('p2m_publikasi', JSON.stringify(pubs));
+    alert('Publikasi kegiatan harian berhasil ditambahkan!');
+    document.getElementById('add-pub-form').reset();
   });
-  localStorage.setItem('p2m_publikasi', JSON.stringify(pubs));
-  alert('Publikasi kegiatan harian berhasil ditambahkan!');
-  this.reset();
 });
 
 document.getElementById('update-info-form').addEventListener('submit', function(e) {
