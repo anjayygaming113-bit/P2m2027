@@ -14,16 +14,19 @@ body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#f4f7f5
 a{text-decoration:none;color:inherit}
 
 .admin-container{display:flex;min-height:100vh}
-.sidebar{width:260px;background:var(--dark);color:#fff;padding:25px 20px;position:fixed;height:100%;overflow-y:auto}
+.sidebar{width:260px;background:var(--dark);color:#fff;padding:25px 20px;position:fixed;height:100%;overflow-y:auto;z-index:10}
 .sidebar h2{font-size:18px;color:var(--gold);margin-bottom:30px;letter-spacing:1px}
-.sidebar-menu{display:flex;flex-direction:column;gap:10px}
-.sidebar-menu a{padding:12px 15px;border-radius:12px;font-size:14px;font-weight:700;color:#cbd5d0;transition:all .2s}
+.sidebar-menu{display:flex;flex-direction:column;gap:8px}
+.sidebar-menu a{padding:12px 15px;border-radius:12px;font-size:14px;font-weight:700;color:#cbd5d0;transition:all .2s;cursor:pointer}
 .sidebar-menu a:hover, .sidebar-menu a.active{background:var(--green);color:#fff}
 
 .main-content{margin-left:260px;flex:1;padding:30px 40px}
 .header-top{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:20px 30px;border-radius:20px;box-shadow:0 5px 20px rgba(0,0,0,.04);margin-bottom:30px}
 .header-top h1{font-size:22px;color:var(--green)}
 .back-site{font-size:13px;font-weight:700;background:var(--cream);color:var(--green);padding:8px 16px;border-radius:10px;border:1px solid #ebdcc4}
+
+.admin-section{display:none;}
+.admin-section.active{display:block;}
 
 .admin-card{background:#fff;padding:30px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.04);margin-bottom:30px}
 .admin-card h3{font-size:18px;color:var(--green);margin-bottom:20px;border-bottom:2px solid var(--cream);padding-bottom:10px}
@@ -54,95 +57,109 @@ td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px soli
   <aside class="sidebar">
     <h2>P2M 2027 ADMIN</h2>
     <div class="sidebar-menu">
-      <a href="#" class="active">📊 Dashboard Utama</a>
+      <a onclick="switchTab('teks')" id="menu-teks" class="active">📝 Edit Teks & Info</a>
+      <a onclick="switchTab('pengurus')" id="menu-pengurus">👑 Kelola Pengurus</a>
+      <a onclick="switchTab('submember')" id="menu-submember">👥 Tambah Anggota Divisi</a>
+      <a onclick="switchTab('angkatan')" id="menu-angkatan">🖼️ Foto Angkatan XVI</a>
+      <a onclick="switchTab('publikasi')" id="menu-publikasi">📸 Dokumentasi Harian</a>
       <a href="index.html" style="margin-top:20px; color:#f8e8af;">← Kembali ke Website</a>
     </div>
   </aside>
 
   <main class="main-content">
     <div class="header-top">
-      <h1>Dashboard Kelola P2M 2027</h1>
+      <h1 id="page-title">Dashboard: Edit Teks & Info</h1>
       <a href="index.html" class="back-site" target="_blank">Lihat Website Live ↗</a>
     </div>
 
-    <!-- 1. EDIT TEKS UTAMA WEBSITE (Tentang, Tagline, Kontak, dll) -->
-    <div class="admin-card">
-      <h3>Edit Teks Halaman Utama (Tentang & Kontak)</h3>
-      <form id="update-texts-form">
-        <div class="form-group"><label>Tagline / Slogan di Banner</label><input type="text" id="edit-tagline" value="KOMPAK, BERGERAK, BERDAMPAK" required></div>
-        <div class="form-group"><label>Deskripsi Tentang Kami</label><textarea id="edit-tentang" rows="3" required>P2M 2027 adalah kegiatan Pengabdian kepada Masyarakat dari MA Plus Al-Ittihaad yang mengajak siswa untuk belajar, berkolaborasi, dan berkontribusi bagi masyarakat.</textarea></div>
-        <div class="form-grid">
-          <div class="form-group"><label>Email Kelompok</label><input type="email" id="edit-email" value="p2m.alittihaad@gmail.com" required></div>
-          <div class="form-group"><label>Instagram Kelompok</label><input type="text" id="edit-ig" value="@p2m_ppi104" required></div>
-        </div>
-        <button type="submit" class="btn-save">Simpan Perubahan Teks</button>
-      </form>
-    </div>
-
-    <!-- 2. EDIT NAMA & FOTO PENGURUS UTAMA -->
-    <div class="admin-card">
-      <h3>Edit Nama & Ganti Foto Pengurus / Ketua Divisi</h3>
-      <div style="overflow-x:auto;">
-        <table>
-          <thead><tr><th>Foto Saat Ini</th><th>Nama Lengkap</th><th>Jabatan / Divisi</th><th>Ganti Foto Baru</th><th>Aksi</th></tr></thead>
-          <tbody id="admin-team-table"></tbody>
-        </table>
+    <!-- TAB 1: TEKS & INFO -->
+    <div id="section-teks" class="admin-section active">
+      <div class="admin-card">
+        <h3>Edit Teks Halaman Utama (Tentang & Kontak)</h3>
+        <form id="update-texts-form">
+          <div class="form-group"><label>Tagline / Slogan di Banner</label><input type="text" id="edit-tagline" value="KOMPAK, BERGERAK, BERDAMPAK" required></div>
+          <div class="form-group"><label>Deskripsi Tentang Kami</label><textarea id="edit-tentang" rows="3" required>P2M 2027 adalah kegiatan Pengabdian kepada Masyarakat dari MA Plus Al-Ittihaad yang mengajak siswa untuk belajar, berkolaborasi, dan berkontribusi bagi masyarakat.</textarea></div>
+          <div class="form-grid">
+            <div class="form-group"><label>Email Kelompok</label><input type="email" id="edit-email" value="p2m.alittihaad@gmail.com" required></div>
+            <div class="form-group"><label>Instagram Kelompok</label><input type="text" id="edit-ig" value="@p2m_ppi104" required></div>
+          </div>
+          <button type="submit" class="btn-save">Simpan Perubahan Teks</button>
+        </form>
       </div>
     </div>
 
-    <!-- 3. TAMBAH ANGGOTA SUB-DIVISI -->
-    <div class="admin-card">
-      <h3>Tambah Anggota ke dalam Sub-Divisi</h3>
-      <form id="add-submember-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Pilih Divisi Tujuan</label>
-            <select id="sub-divisi-target" required>
-              <option value="pdd">Divisi PDD</option>
-              <option value="acara">Divisi Acara</option>
-              <option value="peralatan">Divisi Peralatan</option>
-              <option value="logistik">Divisi Logistik</option>
-              <option value="keamanan">Divisi Keamanan</option>
-              <option value="konsumsi">Divisi Konsumsi</option>
-              <option value="tarbiyah">Divisi Tarbiyah</option>
-              <option value="dakwah">Divisi Dakwah</option>
-              <option value="permainan">Divisi Permainan</option>
-              <option value="perlombaan">Divisi Perlombaan</option>
-              <option value="sosmas">Divisi Sosmas</option>
-              <option value="sosek">Divisi Sosek</option>
-              <option value="hal">Divisi Hub. Antar Lembaga</option>
-              <option value="kesehatan">Divisi Kesehatan</option>
-              <option value="kebersihan">Divisi Kebersihan</option>
-              <option value="support">Divisi Support</option>
-            </select>
+    <!-- TAB 2: KELOLA PENGURUS -->
+    <div id="section-pengurus" class="admin-section">
+      <div class="admin-card">
+        <h3>Edit Nama & Ganti Foto Pengurus / Ketua Divisi</h3>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>Foto Saat Ini</th><th>Nama Lengkap</th><th>Jabatan / Divisi</th><th>Ganti Foto Baru</th><th>Aksi</th></tr></thead>
+            <tbody id="admin-team-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: TAMBAH ANGGOTA DIVISI -->
+    <div id="section-submember" class="admin-section">
+      <div class="admin-card">
+        <h3>Tambah Anggota ke dalam Sub-Divisi</h3>
+        <form id="add-submember-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Pilih Divisi Tujuan</label>
+              <select id="sub-divisi-target" required>
+                <option value="pdd">Divisi PDD</option>
+                <option value="acara">Divisi Acara</option>
+                <option value="peralatan">Divisi Peralatan</option>
+                <option value="logistik">Divisi Logistik</option>
+                <option value="keamanan">Divisi Keamanan</option>
+                <option value="konsumsi">Divisi Konsumsi</option>
+                <option value="tarbiyah">Divisi Tarbiyah</option>
+                <option value="dakwah">Divisi Dakwah</option>
+                <option value="permainan">Divisi Permainan</option>
+                <option value="perlombaan">Divisi Perlombaan</option>
+                <option value="sosmas">Divisi Sosmas</option>
+                <option value="sosek">Divisi Sosek</option>
+                <option value="hal">Divisi Hub. Antar Lembaga</option>
+                <option value="kesehatan">Divisi Kesehatan</option>
+                <option value="kebersihan">Divisi Kebersihan</option>
+                <option value="support">Divisi Support</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Nama Anggota Baru</label><input type="text" id="sub-name" placeholder="Nama anggota..." required></div>
+            <div class="form-group"><label>Pilih Foto dari Galeri HP</label><input type="file" id="sub-img-file" accept="image/*" required></div>
           </div>
-          <div class="form-group"><label>Nama Anggota Baru</label><input type="text" id="sub-name" placeholder="Nama anggota..." required></div>
-          <div class="form-group"><label>Pilih Foto dari Galeri HP</label><input type="file" id="sub-img-file" accept="image/*" required></div>
-        </div>
-        <button type="submit" class="btn-save">Tambah Anggota</button>
-      </form>
+          <button type="submit" class="btn-save">Tambah Anggota</button>
+        </form>
+      </div>
     </div>
 
-    <!-- 4. GANTI FOTO UTAMA ANGKATAN -->
-    <div class="admin-card">
-      <h3>Perbarui Foto Utama Angkatan XVI</h3>
-      <form id="update-angkatan-form">
-        <div class="form-group"><label>Pilih Foto Angkatan dari Galeri HP</label><input type="file" id="angkatan-img-file" accept="image/*" required></div>
-        <button type="submit" class="btn-save">Perbarui Foto Angkatan</button>
-      </form>
+    <!-- TAB 4: FOTO ANGKATAN -->
+    <div id="section-angkatan" class="admin-section">
+      <div class="admin-card">
+        <h3>Perbarui Foto Utama Angkatan XVI</h3>
+        <form id="update-angkatan-form">
+          <div class="form-group"><label>Pilih Foto Angkatan dari Galeri HP</label><input type="file" id="angkatan-img-file" accept="image/*" required></div>
+          <button type="submit" class="btn-save">Perbarui Foto Angkatan</button>
+        </form>
+      </div>
     </div>
 
-    <!-- 5. TAMBAH / UPLOAD FOTO DOKUMENTASI KEGIATAN HARIAN -->
-    <div class="admin-card">
-      <h3>Tambah Publikasi / Foto Kegiatan Harian</h3>
-      <form id="add-pub-form">
-        <div class="form-grid">
-          <div class="form-group"><label>Judul Kegiatan / Hari</label><input type="text" id="pub-judul" placeholder="Contoh: Hari ke-2: Kerja Bakti" required></div>
-          <div class="form-group"><label>Pilih Foto Kegiatan dari Galeri HP</label><input type="file" id="pub-img-file" accept="image/*" required></div>
-        </div>
-        <div class="form-group"><label>Deskripsi Singkat</label><textarea id="pub-desc" rows="2" placeholder="Tulis ringkasan singkat kegiatan..." required></textarea></div>
-        <button type="submit" class="btn-save">Terbitkan Publikasi</button>
-      </form>
+    <!-- TAB 5: PUBLIKASI -->
+    <div id="section-publikasi" class="admin-section">
+      <div class="admin-card">
+        <h3>Tambah Publikasi / Foto Kegiatan Harian</h3>
+        <form id="add-pub-form">
+          <div class="form-grid">
+            <div class="form-group"><label>Judul Kegiatan / Hari</label><input type="text" id="pub-judul" placeholder="Contoh: Hari ke-2: Kerja Bakti" required></div>
+            <div class="form-group"><label>Pilih Foto Kegiatan dari Galeri HP</label><input type="file" id="pub-img-file" accept="image/*" required></div>
+          </div>
+          <div class="form-group"><label>Deskripsi Singkat</label><textarea id="pub-desc" rows="2" placeholder="Tulis ringkasan singkat kegiatan..." required></textarea></div>
+          <button type="submit" class="btn-save">Terbitkan Publikasi</button>
+        </form>
+      </div>
     </div>
 
     <!-- RESET -->
@@ -153,6 +170,23 @@ td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px soli
 </div>
 
 <script>
+function switchTab(tabId) {
+  document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+  document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+  
+  document.getElementById('section-' + tabId).classList.add('active');
+  document.getElementById('menu-' + tabId).classList.add('active');
+
+  const titles = {
+    'teks': 'Dashboard: Edit Teks & Info',
+    'pengurus': 'Dashboard: Kelola Pengurus',
+    'submember': 'Dashboard: Tambah Anggota Divisi',
+    'angkatan': 'Dashboard: Foto Angkatan XVI',
+    'publikasi': 'Dashboard: Dokumentasi Harian'
+  };
+  document.getElementById('page-title').innerText = titles[tabId];
+}
+
 const defaultTeam = [
   {id:'ketua', name:'Muhammad Naufal Ismail', role:'Ketua Umum', img:'ketua_umum.jpg', members:[]},
   {id:'ketua1', name:'Rafli Habiburrohman', role:'Ketua 1', img:'ketua1.jpg', members:[]},
@@ -218,7 +252,6 @@ function deleteTeam(index) {
   }
 }
 
-// Fungsi Kompresi Foto Otomatis agar tidak error/kepenuhan
 function compressAndSavePhoto(event, callback) {
   const file = event.target.files[0];
   if(!file) return;
