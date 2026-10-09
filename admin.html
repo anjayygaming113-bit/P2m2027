@@ -60,8 +60,17 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
 
   <main class="main-content">
     <div class="header-top">
-      <h1>Dashboard Kelola Anggota P2M</h1>
+      <h1>Dashboard Kelola P2M 2027</h1>
       <a href="index.html" class="back-site" target="_blank">Lihat Website Live ↗</a>
+    </div>
+
+    <!-- TABEL KELOLA KARTU TIM UTAMA -->
+    <div class="admin-card">
+      <h3>Daftar Kartu Divisi / Pengurus Utama</h3>
+      <table>
+        <thead><tr><th>Foto</th><th>Nama</th><th>Jabatan</th><th>Aksi</th></tr></thead>
+        <tbody id="admin-team-table"></tbody>
+      </table>
     </div>
 
     <!-- TAMBAH ANGGOTA KEDALAM SUB-DIVISI (CONTOH: PENGGIAT PDD) -->
@@ -136,6 +145,29 @@ const defaultTeam = [
 
 let teamData = JSON.parse(localStorage.getItem('p2m_team')) || defaultTeam;
 
+function renderAdminTable() {
+  const tbody = document.getElementById('admin-team-table');
+  tbody.innerHTML = '';
+  teamData.forEach((item, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><img src="${item.img}" onerror="this.src='bg.jpg'"></td>
+      <td><b>${item.name}</b></td>
+      <td>${item.role}</td>
+      <td><button class="btn-del" onclick="deleteTeam(${index})">Hapus</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function deleteTeam(index) {
+  if(confirm('Yakin ingin menghapus divisi/pengurus ini?')) {
+    teamData.splice(index, 1);
+    localStorage.setItem('p2m_team', JSON.stringify(teamData));
+    renderAdminTable();
+  }
+}
+
 document.getElementById('add-submember-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const targetId = document.getElementById('sub-divisi-target').value;
@@ -158,6 +190,8 @@ document.getElementById('update-angkatan-form').addEventListener('submit', funct
   localStorage.setItem('p2m_angkatan_img', imgName);
   alert('Foto Angkatan XVI berhasil diperbarui!');
 });
+
+document.addEventListener('DOMContentLoaded', renderAdminTable);
 </script>
 </body>
 </html>
