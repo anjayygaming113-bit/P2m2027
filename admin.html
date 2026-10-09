@@ -47,15 +47,6 @@ a{text-decoration:none;color:inherit}
 .btn-save{padding:12px 24px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer;transition:background .2s}
 .btn-save:hover{background:var(--green2)}
 
-/* TABEL DATA */
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th, td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
-th{background:#f9fbf9;color:var(--green);font-weight:800}
-td img{width:40px;height:40px;object-fit:cover;border-radius:8px}
-.action-btns{display:flex;gap:10px}
-.btn-edit{background:var(--gold);color:#123127;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
-.btn-del{background:var(--danger);color:#fff;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
-
 @media(max-width:800px){
   .sidebar{width:70px;padding:20px 10px}
   .sidebar h2, .sidebar-menu span{display:none}
@@ -71,7 +62,8 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px}
     <h2>P2M 2027 ADMIN</h2>
     <div class="sidebar-menu">
       <a href="#" class="active">📊 Beranda Admin</a>
-      <a href="#kelola-anggota">👥 Kelola Anggota</a>
+      <a href="#kelola-anggota">👥 Kelola Pengurus Utama</a>
+      <a href="#kelola-subdivisi">📋 Tambah Anggota Divisi</a>
       <a href="#kelola-publikasi">📰 Publikasi Harian</a>
       <a href="#kelola-galeri">🖼️ Galeri Angkatan</a>
       <a href="index.html" style="margin-top:40px; color:#f8e8af;">← Kembali ke Website</a>
@@ -101,36 +93,91 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px}
       </div>
     </div>
 
-    <!-- KELOLA ANGGOTA / STRUKTUR -->
+    <!-- 1. KELOLA PENGURUS UTAMA -->
     <div class="admin-card" id="kelola-anggota">
-      <h3>Tambah / Perbarui Data Anggota & Pengurus</h3>
-      <form onsubmit="event.preventDefault(); alert('Fitur simpan data terhubung!');">
+      <h3>Kelola Pengurus & Penanggung Jawab Utama</h3>
+      <form onsubmit="event.preventDefault(); alert('Data pengurus utama berhasil diperbarui!');">
         <div class="form-grid">
           <div class="form-group">
             <label>Nama Lengkap</label>
             <input type="text" placeholder="Contoh: Arshal Dinur Fauzan" required>
           </div>
           <div class="form-group">
-            <label>Jabatan / Divisi</label>
+            <label>Pilih Posisi / Divisi Utama</label>
             <select>
               <option>Ketua Umum</option>
+              <option>Ketua 1</option>
+              <option>Ketua 2</option>
+              <option>Ketua 3</option>
               <option>Sekretaris</option>
               <option>Bendahara</option>
               <option>Divisi PDD</option>
               <option>Divisi Acara</option>
-              <option>Divisi Lainnya</option>
+              <option>Divisi Peralatan</option>
+              <option>Divisi Logistik</option>
+              <option>Divisi Keamanan</option>
+              <option>Divisi Konsumsi</option>
+              <option>Divisi Tarbiyah</option>
+              <option>Divisi Dakwah</option>
+              <option>Divisi Permainan</option>
+              <option>Divisi Perlombaan</option>
+              <option>Divisi Sosial Kemasyarakatan (Sosmas)</option>
+              <option>Divisi Sosial Ekonomi (Sosek)</option>
+              <option>Divisi Hubungan Antar Lembaga (HAL)</option>
+              <option>Divisi Kesehatan</option>
+              <option>Divisi Kebersihan</option>
+              <option>Divisi Support</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Unggah Foto Kartu/Profil (.jpg)</label>
+            <label>Unggah Foto Kartu Utama (.jpg)</label>
             <input type="file" accept="image/*" required>
           </div>
         </div>
-        <button type="submit" class="btn-save">Simpan Anggota Baru</button>
+        <button type="submit" class="btn-save">Simpan Perubahan Pengurus</button>
       </form>
     </div>
 
-    <!-- KELOLA PUBLIKASI HARIAN -->
+    <!-- 2. TAMBAH ANGGOTA / PENGIKUT DI DALAM DIVISI (CONTOH: PDD) -->
+    <div class="admin-card" id="kelola-subdivisi">
+      <h3>Tambah Anggota ke dalam Divisi (Misal: Anggota PDD)</h3>
+      <form onsubmit="event.preventDefault(); alert('Anggota divisi berhasil ditambahkan!');">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Pilih Divisi Tujuan</label>
+            <select>
+              <option>Divisi PDD</option>
+              <option>Divisi Acara</option>
+              <option>Divisi Peralatan</option>
+              <option>Divisi Logistik</option>
+              <option>Divisi Keamanan</option>
+              <option>Divisi Konsumsi</option>
+              <option>Divisi Tarbiyah</option>
+              <option>Divisi Dakwah</option>
+              <option>Divisi Permainan</option>
+              <option>Divisi Perlombaan</option>
+              <option>Divisi Sosial Kemasyarakatan</option>
+              <option>Divisi Sosial Ekonomi</option>
+              <option>Divisi Hubungan Antar Lembaga</option>
+              <option>Divisi Kesehatan</option>
+              <option>Divisi Kebersihan</option>
+              <option>Divisi Support</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Nama Anggota</label>
+            <input type="text" placeholder="Contoh: Sandi Pirmansah" required>
+          </div>
+          <div class="form-group">
+            <label>Unggah Foto Detail Anggota (Tampil saat diklik)</label>
+            <input type="file" accept="image/*" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-save">Tambah Anggota ke Divisi</button>
+      </form>
+    </div>
+
+    <!-- 3. KELOLA PUBLIKASI HARIAN -->
     <div class="admin-card" id="kelola-publikasi">
       <h3>Tambah Laporan Publikasi Harian</h3>
       <form onsubmit="event.preventDefault(); alert('Publikasi berhasil ditambahkan!');">
@@ -152,7 +199,7 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px}
       </form>
     </div>
 
-    <!-- KELOLA GALERI FOTO ANGKATAN -->
+    <!-- 4. KELOLA GALERI FOTO ANGKATAN -->
     <div class="admin-card" id="kelola-galeri">
       <h3>Perbarui Foto Utama Angkatan XVI</h3>
       <form onsubmit="event.preventDefault(); alert('Foto angkatan diperbarui!');">
