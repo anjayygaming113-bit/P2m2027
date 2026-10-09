@@ -36,10 +36,10 @@ a{text-decoration:none;color:inherit}
 .btn-reset{background:#888; margin-top:10px;}
 
 table{width:100%;border-collapse:collapse;margin-top:10px}
-th, td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
+th, td{padding:12px 14px;text-align:left;border-bottom:1px solid #eee;font-size:14px;vertical-align:middle;}
 th{background:#f9fbf9;color:var(--green);font-weight:800}
-td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
-.btn-del{background:var(--danger);color:#fff;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
+td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px solid #ddd;}
+.btn-del{background:var(--danger);color:#fff;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
 
 @media(max-width:800px){
   .sidebar{width:70px;padding:20px 10px}
@@ -65,16 +65,19 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
       <a href="index.html" class="back-site" target="_blank">Lihat Website Live ↗</a>
     </div>
 
-    <!-- 1. KELOLA NAMA ANGGOTA & DIVISI UTAMA -->
+    <!-- 1. EDIT NAMA & GANTI FOTO PENGURUS/KETUA DIVISI -->
     <div class="admin-card">
-      <h3>Ubah / Edit Nama Anggota & Divisi Utama</h3>
-      <table>
-        <thead><tr><th>Foto</th><th>Nama</th><th>Jabatan/Divisi</th><th>Aksi</th></tr></thead>
-        <tbody id="admin-team-table"></tbody>
-      </table>
+      <h3>Edit Nama & Ganti Foto Pengurus / Ketua Divisi</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:15px;">Ubah nama langsung di kolom teks atau klik tombol ganti foto untuk memilih foto baru dari galeri HP.</p>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Foto Saat Ini</th><th>Nama Lengkap</th><th>Jabatan / Divisi</th><th>Ganti Foto Baru</th><th>Aksi</th></tr></thead>
+          <tbody id="admin-team-table"></tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- 2. TAMBAH ANGGOTA / SUB-DIVISI (LANGSUNG PILIH DARI GALERI HP) -->
+    <!-- 2. TAMBAH ANGGOTA / SUB-DIVISI -->
     <div class="admin-card">
       <h3>Tambah Anggota ke dalam Sub-Divisi</h3>
       <form id="add-submember-form">
@@ -107,7 +110,7 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
       </form>
     </div>
 
-    <!-- 3. FOTO UTAMA ANGKATAN (LANGSUNG DARI GALERI) -->
+    <!-- 3. GANTI FOTO UTAMA ANGKATAN -->
     <div class="admin-card">
       <h3>Perbarui Foto Utama Angkatan XVI</h3>
       <form id="update-angkatan-form">
@@ -116,7 +119,7 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
       </form>
     </div>
 
-    <!-- 4. FOTO & PUBLIKASI HARIAN (LANGSUNG DARI GALERI) -->
+    <!-- 4. TAMBAH / EDIT FOTO KEGIATAN PUBLIKASI HARIAN -->
     <div class="admin-card">
       <h3>Tambah Publikasi / Foto Kegiatan Harian</h3>
       <form id="add-pub-form">
@@ -129,13 +132,13 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
       </form>
     </div>
 
-    <!-- 5. PROGRAM KERJA & PETA LOKASI -->
+    <!-- 5. PROGRAM KERJA & LOKASI PETA -->
     <div class="admin-card">
       <h3>Perbarui Informasi Program Kerja & Lokasi Peta</h3>
       <form id="update-info-form">
         <div class="form-group"><label>Tanggal Pelaksanaan</label><input type="text" id="info-tgl-input" placeholder="Contoh: 12 - 15 Juli 2027" required></div>
         <div class="form-group"><label>Agenda & Kegiatan Utama</label><textarea id="info-agenda-input" rows="2" placeholder="Rincian agenda..." required></textarea></div>
-        <div class="form-group"><label>Alamat Posko / Peta Lokasi</label><input type="text" id="info-lokasi-input" placeholder="Contoh: Desa Sukamaju, Kec. Cisayong" required></div>
+        <div class="form-group"><label>Keterangan Lokasi / Nama Posko</label><input type="text" id="info-lokasi-input" placeholder="Contoh: Posko Utama Desa Sukamaju" required></div>
         <button type="submit" class="btn-save">Simpan Info Kegiatan</button>
       </form>
     </div>
@@ -153,24 +156,24 @@ const defaultTeam = [
   {id:'ketua1', name:'Rafli Habiburrohman', role:'Ketua 1', img:'ketua1.jpg', members:[]},
   {id:'ketua2', name:'Muhammad Ridho Al Baroki', role:'Ketua 2', img:'ketua2.jpg', members:[]},
   {id:'ketua3', name:'Muhammad Azam Maulidan', role:'Ketua 3', img:'ketua3.jpg', members:[]},
-  {id:'sekretaris', name:'Dana Jaenal Mutakin', role:'Sekretaris', img:'sekretaris.jpg', members:[{name:'Dana Jaenal Mutakin', img:'sekretaris.jpg'}]},
-  {id:'bendahara', name:'Karin Waladiatul Ramdani', role:'Bendahara', img:'bendahara.jpg', members:[{name:'Karin Waladiatul Ramdani', img:'bendahara.jpg'}]},
+  {id:'sekretaris', name:'Dana Jaenal Mutakin', role:'Sekretaris', img:'sekretaris.jpg', members:[]},
+  {id:'bendahara', name:'Karin Waladiatul Ramdani', role:'Bendahara', img:'bendahara.jpg', members:[]},
   {id:'pdd', name:'Arshal Dinur Fauzan', role:'Divisi PDD', img:'pdd.jpg', members:[{name:'Sandi Pirmansah', img:'pdd_sandi.jpg'}, {name:'M. Al-fauzan', img:'pdd_fauzan.jpg'}, {name:'Erni Nurwidiyanti', img:'pdd_erni.jpg'}, {name:'Raihana Kansa Aulia', img:'pdd_raihana.jpg'}]},
-  {id:'acara', name:'Nisa Adila Wardani', role:'Divisi Acara', img:'acara.jpg', members:[{name:'Nisa Adila Wardani', img:'acara.jpg'}]},
-  {id:'peralatan', name:'Zia Al-khulaeni', role:'Divisi Peralatan', img:'peralatan.jpg', members:[{name:'Zia Al-khulaeni', img:'peralatan.jpg'}]},
-  {id:'logistik', name:'Muhammad Akmal Al Fajri', role:'Divisi Logistik', img:'logistik.jpg', members:[{name:'Muhammad Akmal Al Fajri', img:'logistik.jpg'}]},
-  {id:'keamanan', name:'Indhira Hadi Pancasatria', role:'Divisi Keamanan', img:'keamanan.jpg', members:[{name:'Indhira Hadi Pancasatria', img:'keamanan.jpg'}]},
-  {id:'konsumsi', name:'Rahma Putri Ramadani', role:'Divisi Konsumsi', img:'konsumsi.jpg', members:[{name:'Rahma Putri Ramadani', img:'konsumsi.jpg'}]},
-  {id:'tarbiyah', name:'Hilya Nadzira Majdina', role:'Divisi Tarbiyah', img:'tarbiyah.jpg', members:[{name:'Hilya Nadzira Majdina', img:'tarbiyah.jpg'}]},
-  {id:'dakwah', name:'Muhammad Azzam Maulidan', role:'Divisi Dakwah', img:'dakwah.jpg', members:[{name:'Muhammad Azzam Maulidan', img:'dakwah.jpg'}]},
-  {id:'permainan', name:'Difa Mulki Hanifa', role:'Divisi Permainan', img:'permainan.jpg', members:[{name:'Difa Mulki Hanifa', img:'permainan.jpg'}]},
-  {id:'perlombaan', name:'Yusfi Ruslan Atsaury', role:'Divisi Perlombaan', img:'perlombaan.jpg', members:[{name:'Yusfi Ruslan Atsaury', img:'perlombaan.jpg'}]},
-  {id:'sosmas', name:'Pyckan Ramadania Putri', role:'Divisi Sosmas', img:'sosmas.jpg', members:[{name:'Pyckan Ramadania Putri', img:'sosmas.jpg'}]},
-  {id:'sosek', name:'Raisa Musakinah', role:'Divisi Sosek', img:'sosek.jpg', members:[{name:'Raisa Musakinah', img:'sosek.jpg'}]},
-  {id:'hal', name:'Dani Muhammad Ridwan', role:'Divisi Hub. Antar Lembaga', img:'hal.jpg', members:[{name:'Dani Muhammad Ridwan', img:'hal.jpg'}]},
-  {id:'kesehatan', name:'Rahmi Lestari S.M', role:'Divisi Kesehatan', img:'kesehatan.jpg', members:[{name:'Rahmi Lestari S.M', img:'kesehatan.jpg'}]},
-  {id:'kebersihan', name:'Ryan Sukma Gunardi', role:'Divisi Kebersihan', img:'kebersihan.jpg', members:[{name:'Ryan Sukma Gunardi', img:'kebersihan.jpg'}]},
-  {id:'support', name:'Muhammad Raihan Firdaus', role:'Divisi Support', img:'support.jpg', members:[{name:'Muhammad Raihan Firdaus', img:'support.jpg'}]}
+  {id:'acara', name:'Nisa Adila Wardani', role:'Divisi Acara', img:'acara.jpg', members:[]},
+  {id:'peralatan', name:'Zia Al-khulaeni', role:'Divisi Peralatan', img:'peralatan.jpg', members:[]},
+  {id:'logistik', name:'Muhammad Akmal Al Fajri', role:'Divisi Logistik', img:'logistik.jpg', members:[]},
+  {id:'keamanan', name:'Indhira Hadi Pancasatria', role:'Divisi Keamanan', img:'keamanan.jpg', members:[]},
+  {id:'konsumsi', name:'Rahma Putri Ramadani', role:'Divisi Konsumsi', img:'konsumsi.jpg', members:[]},
+  {id:'tarbiyah', name:'Hilya Nadzira Majdina', role:'Divisi Tarbiyah', img:'tarbiyah.jpg', members:[]},
+  {id:'dakwah', name:'Muhammad Azzam Maulidan', role:'Divisi Dakwah', img:'dakwah.jpg', members:[]},
+  {id:'permainan', name:'Difa Mulki Hanifa', role:'Divisi Permainan', img:'permainan.jpg', members:[]},
+  {id:'perlombaan', name:'Yusfi Ruslan Atsaury', role:'Divisi Perlombaan', img:'perlombaan.jpg', members:[]},
+  {id:'sosmas', name:'Pyckan Ramadania Putri', role:'Divisi Sosmas', img:'sosmas.jpg', members:[]},
+  {id:'sosek', name:'Raisa Musakinah', role:'Divisi Sosek', img:'sosek.jpg', members:[]},
+  {id:'hal', name:'Dani Muhammad Ridwan', role:'Divisi Hub. Antar Lembaga', img:'hal.jpg', members:[]},
+  {id:'kesehatan', name:'Rahmi Lestari S.M', role:'Divisi Kesehatan', img:'kesehatan.jpg', members:[]},
+  {id:'kebersihan', name:'Ryan Sukma Gunardi', role:'Divisi Kebersihan', img:'kebersihan.jpg', members:[]},
+  {id:'support', name:'Muhammad Raihan Firdaus', role:'Divisi Support', img:'support.jpg', members:[]}
 ];
 
 let teamData = JSON.parse(localStorage.getItem('p2m_team')) || defaultTeam;
@@ -184,6 +187,7 @@ function renderAdminTable() {
       <td><img src="${item.img}" onerror="this.src='bg.jpg'"></td>
       <td><input type="text" value="${item.name}" onchange="updateName(${index}, this.value)" style="padding:6px; width:100%;"></td>
       <td><input type="text" value="${item.role}" onchange="updateRole(${index}, this.value)" style="padding:6px; width:100%;"></td>
+      <td><input type="file" accept="image/*" onchange="updateTeamPhoto(event, ${index})" style="font-size:11px; width:110px;"></td>
       <td><button class="btn-del" onclick="deleteTeam(${index})">Hapus</button></td>
     `;
     tbody.appendChild(tr);
@@ -198,6 +202,19 @@ function updateRole(index, val) {
   teamData[index].role = val;
   localStorage.setItem('p2m_team', JSON.stringify(teamData));
 }
+function updateTeamPhoto(event, index) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      teamData[index].img = e.target.result;
+      localStorage.setItem('p2m_team', JSON.stringify(teamData));
+      renderAdminTable();
+      alert('Foto pengurus berhasil diperbarui!');
+    }
+    reader.readAsDataURL(file);
+  }
+}
 function deleteTeam(index) {
   if(confirm('Yakin ingin menghapus data ini?')) {
     teamData.splice(index, 1);
@@ -206,7 +223,6 @@ function deleteTeam(index) {
   }
 }
 
-// Fungsi Bantu Ubah File Gambar jadi Base64 agar langsung tampil dari HP
 function convertImageToBase64(fileInput, callback) {
   const file = fileInput.files[0];
   if(file) {
