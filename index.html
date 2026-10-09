@@ -346,7 +346,14 @@ const defaultTeam = [
   {id:'support', name:'Muhammad Raihan Firdaus', role:'Divisi Support', img:'support.jpg', members:[]}
 ];
 
+// Paksa hapus nama ketua jika tidak sengaja tersimpan di memori browser
 let teamData = JSON.parse(localStorage.getItem('p2m_team')) || defaultTeam;
+teamData.forEach(div => {
+  if(div.members && div.members.length > 0) {
+    div.members = div.members.filter(m => m.name !== div.name);
+  }
+});
+localStorage.setItem('p2m_team', JSON.stringify(teamData));
 
 function renderTeam() {
   const container = document.getElementById('team-slider-container');
