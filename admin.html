@@ -30,9 +30,10 @@ a{text-decoration:none;color:inherit}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:20px}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--dark)}
-.form-group input, .form-group select{width:100%;padding:12px 16px;border:1px solid #dce6e0;border-radius:12px;font-family:inherit;font-size:14px;background:#f9fbf9;outline:none;}
+.form-group input, .form-group select, .form-group textarea{width:100%;padding:12px 16px;border:1px solid #dce6e0;border-radius:12px;font-family:inherit;font-size:14px;background:#f9fbf9;outline:none;}
 .btn-save{padding:12px 24px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer;}
 .btn-save:hover{background:var(--green2)}
+.btn-reset{background:#888; margin-top:10px;}
 
 table{width:100%;border-collapse:collapse;margin-top:10px}
 th, td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
@@ -64,18 +65,18 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
       <a href="index.html" class="back-site" target="_blank">Lihat Website Live ↗</a>
     </div>
 
-    <!-- TABEL KELOLA KARTU TIM UTAMA -->
+    <!-- 1. KELOLA NAMA ANGGOTA & DIVISI UTAMA -->
     <div class="admin-card">
-      <h3>Daftar Kartu Divisi / Pengurus Utama</h3>
+      <h3>Ubah / Edit Nama Anggota & Divisi Utama</h3>
       <table>
-        <thead><tr><th>Foto</th><th>Nama</th><th>Jabatan</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>Foto</th><th>Nama</th><th>Jabatan/Divisi</th><th>Aksi</th></tr></thead>
         <tbody id="admin-team-table"></tbody>
       </table>
     </div>
 
-    <!-- TAMBAH ANGGOTA KEDALAM SUB-DIVISI -->
+    <!-- 2. TAMBAH ANGGOTA / SUB-DIVISI -->
     <div class="admin-card">
-      <h3>Tambah Anggota ke dalam Divisi (Misal: Anggota PDD)</h3>
+      <h3>Tambah Anggota ke dalam Sub-Divisi</h3>
       <form id="add-submember-form">
         <div class="form-grid">
           <div class="form-group">
@@ -99,20 +100,49 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
               <option value="support">Divisi Support</option>
             </select>
           </div>
-          <div class="form-group"><label>Nama Anggota Baru</label><input type="text" id="sub-name" placeholder="Contoh: Sandi" required></div>
-          <div class="form-group"><label>Nama File Foto</label><input type="text" id="sub-img" placeholder="Tulis nama file fotonya apa adanya" required></div>
+          <div class="form-group"><label>Nama Anggota Baru</label><input type="text" id="sub-name" placeholder="Nama anggota..." required></div>
+          <div class="form-group"><label>Nama File Foto</label><input type="text" id="sub-img" placeholder="Nama file foto apa adanya" required></div>
         </div>
-        <button type="submit" class="btn-save">Tambah Anggota ke Divisi</button>
+        <button type="submit" class="btn-save">Tambah Anggota</button>
       </form>
     </div>
 
-    <!-- KELOLA FOTO UTAMA ANGKATAN -->
+    <!-- 3. FOTO UTAMA ANGKATAN -->
     <div class="admin-card">
       <h3>Perbarui Foto Utama Angkatan XVI</h3>
       <form id="update-angkatan-form">
-        <div class="form-group"><label>Nama File Foto Angkatan di GitHub</label><input type="text" id="angkatan-img-input" placeholder="Tulis nama file foto angkatan" required></div>
+        <div class="form-group"><label>Nama File Foto Angkatan di GitHub</label><input type="text" id="angkatan-img-input" placeholder="Contoh: angkatan_xvi.jpg" required></div>
         <button type="submit" class="btn-save">Perbarui Foto Angkatan</button>
       </form>
+    </div>
+
+    <!-- 4. FOTO & LAPORAN PUBLIKASI KEGIATAN HARIAN -->
+    <div class="admin-card">
+      <h3>Tambah Publikasi / Foto Kegiatan Harian</h3>
+      <form id="add-pub-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Judul Kegiatan / Hari</label><input type="text" id="pub-judul" placeholder="Contoh: Hari ke-2: Kerja Bakti" required></div>
+          <div class="form-group"><label>Nama File Foto Kegiatan</label><input type="text" id="pub-img" placeholder="Contoh: kegiatan2.jpg" required></div>
+        </div>
+        <div class="form-group"><label>Deskripsi Singkat</label><textarea id="pub-desc" rows="2" placeholder="Tulis ringkasan singkat kegiatan..." required></textarea></div>
+        <button type="submit" class="btn-save">Terbitkan Publikasi</button>
+      </form>
+    </div>
+
+    <!-- 5. PROGRAM KERJA & PETA LOKASI -->
+    <div class="admin-card">
+      <h3>Perbarui Informasi Program Kerja & Lokasi Peta</h3>
+      <form id="update-info-form">
+        <div class="form-group"><label>Tanggal Pelaksanaan</label><input type="text" id="info-tgl-input" placeholder="Contoh: 12 - 15 Juli 2027" required></div>
+        <div class="form-group"><label>Agenda & Kegiatan Utama</label><textarea id="info-agenda-input" rows="2" placeholder="Rincian agenda..." required></textarea></div>
+        <div class="form-group"><label>Alamat Posko / Peta Lokasi</label><input type="text" id="info-lokasi-input" placeholder="Contoh: Desa Sukamaju, Kec. Cisayong" required></div>
+        <button type="submit" class="btn-save">Simpan Info Kegiatan</button>
+      </form>
+    </div>
+
+    <!-- RESET -->
+    <div class="admin-card" style="text-align: center;">
+      <button type="button" class="btn-save btn-reset" onclick="resetData()">🔄 Reset Semua Data ke Awal</button>
     </div>
   </main>
 </div>
@@ -152,16 +182,26 @@ function renderAdminTable() {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><img src="${item.img}" onerror="this.src='bg.jpg'"></td>
-      <td><b>${item.name}</b></td>
-      <td>${item.role}</td>
+      <td><input type="text" value="${item.name}" onchange="updateName(${index}, this.value)" style="padding:6px; width:100%;"></td>
+      <td><input type="text" value="${item.role}" onchange="updateRole(${index}, this.value)" style="padding:6px; width:100%;"></td>
       <td><button class="btn-del" onclick="deleteTeam(${index})">Hapus</button></td>
     `;
     tbody.appendChild(tr);
   });
 }
 
+function updateName(index, val) {
+  teamData[index].name = val;
+  localStorage.setItem('p2m_team', JSON.stringify(teamData));
+}
+
+function updateRole(index, val) {
+  teamData[index].role = val;
+  localStorage.setItem('p2m_team', JSON.stringify(teamData));
+}
+
 function deleteTeam(index) {
-  if(confirm('Yakin ingin menghapus divisi/pengurus ini?')) {
+  if(confirm('Yakin ingin menghapus data ini?')) {
     teamData.splice(index, 1);
     localStorage.setItem('p2m_team', JSON.stringify(teamData));
     renderAdminTable();
@@ -186,10 +226,38 @@ document.getElementById('add-submember-form').addEventListener('submit', functio
 
 document.getElementById('update-angkatan-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const imgName = document.getElementById('angkatan-img-input').value;
-  localStorage.setItem('p2m_angkatan_img', imgName);
-  alert('Foto Angkatan XVI berhasil diperbarui!');
+  localStorage.setItem('p2m_angkatan_img', document.getElementById('angkatan-img-input').value);
+  alert('Foto Angkatan XVI diperbarui!');
 });
+
+document.getElementById('add-pub-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let pubs = JSON.parse(localStorage.getItem('p2m_publikasi')) || [];
+  pubs.push({
+    judul: document.getElementById('pub-judul').value,
+    img: document.getElementById('pub-img').value,
+    desc: document.getElementById('pub-desc').value
+  });
+  localStorage.setItem('p2m_publikasi', JSON.stringify(pubs));
+  alert('Publikasi kegiatan harian berhasil ditambahkan!');
+  this.reset();
+});
+
+document.getElementById('update-info-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  localStorage.setItem('p2m_tanggal', document.getElementById('info-tgl-input').value);
+  localStorage.setItem('p2m_agenda', document.getElementById('info-agenda-input').value);
+  localStorage.setItem('p2m_lokasi', document.getElementById('info-lokasi-input').value);
+  alert('Informasi program kerja & lokasi berhasil diperbarui!');
+});
+
+function resetData() {
+  if(confirm('Yakin ingin mereset seluruh data ke awal?')) {
+    localStorage.clear();
+    alert('Data berhasil direset!');
+    location.reload();
+  }
+}
 
 document.addEventListener('DOMContentLoaded', renderAdminTable);
 </script>
