@@ -170,23 +170,23 @@ td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px soli
       </div>
     </div>
 
-    <!-- TAB 6: KELOLA GOOGLE MAPS -->
+    <!-- TAB 6: KELOLA GOOGLE MAPS (PASTE LINK BIASA) -->
     <div id="section-lokasi" class="admin-section">
       <div class="admin-card">
-        <h3>Kelola Peta Lokasi Posko (Presisi)</h3>
+        <h3>Kelola Google Maps Posko</h3>
         <p style="font-size: 13px; color: var(--muted); margin-bottom: 15px;">
-          Ketik nama lokasi atau pesantren posko agar peta langsung terfokus secara akurat.
+          Buka Google Maps di HP -> Cari lokasinya -> Klik <b>Bagikan (Share)</b> -> <b>Salin Link</b>, lalu tempel (*paste*) link tersebut di kotak bawah ini!
         </p>
         <form id="update-map-form">
           <div class="form-group">
-            <label>Nama Tempat / Alamat Pencarian di Maps</label>
-            <input type="text" id="edit-map-query" value="Pesantren Persatuan Islam 104 Cikajang Garut" required>
+            <label>Tempel Link Google Maps di Sini</label>
+            <input type="text" id="edit-map-link" placeholder="Contoh: https://maps.app.goo.gl/... atau https://goo.gl/maps/..." required>
           </div>
           <div class="form-group">
             <label>Keterangan Teks Lokasi di Bawah Peta</label>
             <input type="text" id="edit-lokasi-text" value="Pesantren Persatuan Islam 104 (PPI 104) Cikajang, Garut" required>
           </div>
-          <button type="submit" class="btn-save">Simpan Pengaturan Peta</button>
+          <button type="submit" class="btn-save">Simpan Link Peta</button>
         </form>
       </div>
     </div>
@@ -406,12 +406,10 @@ document.getElementById('add-pub-form').addEventListener('submit', function(e) {
 
 document.getElementById('update-map-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const query = document.getElementById('edit-map-query').value.trim();
-  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
-  
-  localStorage.setItem('p2m_map_url', mapUrl);
+  const link = document.getElementById('edit-map-link').value.trim();
+  localStorage.setItem('p2m_map_link', link);
   localStorage.setItem('p2m_lokasi_text', document.getElementById('edit-lokasi-text').value);
-  alert('Pengaturan Peta Google Maps berhasil disimpan!');
+  alert('Link Google Maps Berhasil Disimpan!');
 });
 
 function resetData() {
@@ -429,6 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if(localStorage.getItem('p2m_email')) document.getElementById('edit-email').value = localStorage.getItem('p2m_email');
   if(localStorage.getItem('p2m_ig')) document.getElementById('edit-ig').value = localStorage.getItem('p2m_ig');
   if(localStorage.getItem('p2m_lokasi_text')) document.getElementById('edit-lokasi-text').value = localStorage.getItem('p2m_lokasi_text');
+  if(localStorage.getItem('p2m_map_link')) document.getElementById('edit-map-link').value = localStorage.getItem('p2m_map_link');
 });
 </script>
 </body>
