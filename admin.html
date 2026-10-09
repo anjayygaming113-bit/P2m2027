@@ -78,7 +78,7 @@ td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px soli
         <h3>Edit Teks Halaman Utama (Tentang & Kontak)</h3>
         <form id="update-texts-form">
           <div class="form-group"><label>Tagline / Slogan di Banner</label><input type="text" id="edit-tagline" value="KOMPAK, BERGERAK, BERDAMPAK" required></div>
-          <div class="form-group"><label>Deskripsi Tentang Kami</label><textarea id="edit-tentang" rows="3" required>P2M 2027 adalah kegiatan Pengabdian kepada Masyarakat dari MA Plus Al-Ittihaad yang mengajak siswa untuk belajar, berkolaborasi, dan berkontribusi bagi masyarakat.</textarea></div>
+          <div class="form-group"><label>Deskripsi Tentang Kami</label><textarea id="edit-tentang" rows="3" required></textarea></div>
           <div class="form-grid">
             <div class="form-group"><label>Email Kelompok</label><input type="email" id="edit-email" value="p2m.alittihaad@gmail.com" required></div>
             <div class="form-group"><label>Instagram Kelompok</label><input type="text" id="edit-ig" value="@p2m_ppi104" required></div>
@@ -136,14 +136,21 @@ td img{width:45px;height:45px;object-fit:cover;border-radius:8px;border:1px soli
       </div>
     </div>
 
-    <!-- TAB 4: FOTO ANGKATAN -->
+    <!-- TAB 4: FOTO ANGKATAN (BISA TAMBAH BANYAK & KELOLA) -->
     <div id="section-angkatan" class="admin-section">
       <div class="admin-card">
-        <h3>Perbarui Foto Utama Angkatan XVI</h3>
-        <form id="update-angkatan-form">
-          <div class="form-group"><label>Pilih Foto Angkatan dari Galeri HP</label><input type="file" id="angkatan-img-file" accept="image/*" required></div>
-          <button type="submit" class="btn-save">Perbarui Foto Angkatan</button>
+        <h3>Tambah & Kelola Foto Angkatan XVI</h3>
+        <form id="add-angkatan-form" style="margin-bottom: 25px;">
+          <div class="form-group"><label>Pilih Foto Baru untuk Galeri Angkatan</label><input type="file" id="angkatan-img-file" accept="image/*" required></div>
+          <button type="submit" class="btn-save">Tambah Foto ke Galeri Angkatan</button>
         </form>
+        <h4>Daftar Foto Angkatan Saat Ini:</h4>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>Foto</th><th>No</th><th>Aksi Hapus</th></tr></thead>
+            <tbody id="admin-angkatan-table"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -185,6 +192,7 @@ function switchTab(tabId) {
     'publikasi': 'Dashboard: Dokumentasi Harian'
   };
   document.getElementById('page-title').innerText = titles[tabId];
+  if(tabId === 'angkatan') renderAngkatanTable();
 }
 
 const defaultTeam = [
@@ -252,6 +260,32 @@ function deleteTeam(index) {
   }
 }
 
+function renderAngkatanTable() {
+  let list = JSON.parse(localStorage.getItem('p2m_angkatan_list')) || ['angkatan_xvi.jpg'];
+  const tbody = document.getElementById('admin-angkatan-table');
+  tbody.innerHTML = '';
+  list.forEach((imgSrc, idx) => {
+    tbody.innerHTML += `
+      <tr>
+        <td><img src="${imgSrc}" onerror="this.src='bg.jpg'"></td>
+        <td><b>Foto #${idx + 1}</b></td>
+        <td><button class="btn-del" onclick="deleteAngkatan(${idx})">Hapus</button></td>
+      </tr>
+    `;
+  });
+}
+
+function deleteAngkatan(idx) {
+  let list = JSON.parse(localStorage.getItem('p2m_angkatan_list')) || ['angkatan_xvi.jpg'];
+  if(list.length <= 1) {
+    alert('Minimal harus ada 1 foto angkatan!');
+    return;
+  }
+  list.splice(idx, 1);
+  localStorage.setItem('p2m_angkatan_list', JSON.stringify(list));
+  renderAngkatanTable();
+}
+
 function compressAndSavePhoto(event, callback) {
   const file = event.target.files[0];
   if(!file) return;
@@ -260,8 +294,8 @@ function compressAndSavePhoto(event, callback) {
     const img = new Image();
     img.onload = function() {
       const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 800;
-      const MAX_HEIGHT = 800;
+      const MAX_WIDTH = 900;
+      const MAX_HEIGHT = 900;
       let width = img.width;
       let height = img.height;
       if (width > height) {
@@ -273,7 +307,7 @@ function compressAndSavePhoto(event, callback) {
       canvas.height = height;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, width, height);
-      callback(canvas.toDataURL('image/jpeg', 0.7));
+      callback(canvas.toDataURL('image/jpeg', 0.75));
     }
     img.src = e.target.result;
   }
@@ -311,16 +345,19 @@ document.getElementById('add-submember-form').addEventListener('submit', functio
   }
 });
 
-document.getElementById('update-angkatan-form').addEventListener('submit', function(e) {
+document.getElementById('add-angkatan-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const fileInput = document.getElementById('angkatan-img-file');
   const file = fileInput.files[0];
   if(file) {
     const fakeEvent = { target: { files: [file] } };
     compressAndSavePhoto(fakeEvent, function(base64Img) {
-      localStorage.setItem('p2m_angkatan_img', base64Img);
-      alert('Foto Angkatan XVI berhasil diperbarui!');
-      document.getElementById('update-angkatan-form').reset();
+      let list = JSON.parse(localStorage.getItem('p2m_angkatan_list')) || ['angkatan_xvi.jpg'];
+      list.push(base64Img);
+      localStorage.setItem('p2m_angkatan_list', JSON.stringify(list));
+      alert('Foto angkatan baru berhasil ditambahkan ke galeri!');
+      document.getElementById('add-angkatan-form').reset();
+      renderAngkatanTable();
     });
   }
 });
