@@ -30,7 +30,7 @@ a{text-decoration:none;color:inherit}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:20px}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--dark)}
-.form-group input, .form-group select, .form-group textarea{width:100%;padding:12px 16px;border:1px solid #dce6e0;border-radius:12px;font-family:inherit;font-size:14px;background:#f9fbf9;outline:none;}
+.form-group input, .form-group select{width:100%;padding:12px 16px;border:1px solid #dce6e0;border-radius:12px;font-family:inherit;font-size:14px;background:#f9fbf9;outline:none;}
 .btn-save{padding:12px 24px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer;}
 .btn-save:hover{background:var(--green2)}
 
@@ -38,7 +38,6 @@ table{width:100%;border-collapse:collapse;margin-top:10px}
 th, td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
 th{background:#f9fbf9;color:var(--green);font-weight:800}
 td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
-.action-btns{display:flex;gap:8px}
 .btn-del{background:var(--danger);color:#fff;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
 
 @media(max-width:800px){
@@ -65,29 +64,40 @@ td img{width:40px;height:40px;object-fit:cover;border-radius:8px;}
       <a href="index.html" class="back-site" target="_blank">Lihat Website Live ↗</a>
     </div>
 
-    <!-- TAMBAH PENGURUS UTAMA -->
+    <!-- TAMBAH ANGGOTA KEDALAM SUB-DIVISI (CONTOH: PENGGIAT PDD) -->
     <div class="admin-card">
-      <h3>Tambah Kartu Pengurus / Divisi Utama</h3>
-      <form id="add-team-form">
+      <h3>Tambah Anggota ke dalam Divisi (Misal: Anggota PDD)</h3>
+      <form id="add-submember-form">
         <div class="form-grid">
-          <div class="form-group"><label>Nama Lengkap</label><input type="text" id="add-name" required></div>
-          <div class="form-group"><label>Jabatan / Divisi</label><input type="text" id="add-role" placeholder="Contoh: Ketua Umum / Divisi PDD" required></div>
-          <div class="form-group"><label>Nama File Foto (.jpg)</label><input type="text" id="add-img" placeholder="Contoh: ketua_umum.jpg" required></div>
+          <div class="form-group">
+            <label>Pilih Divisi Tujuan</label>
+            <select id="sub-divisi-target" required>
+              <option value="pdd">Divisi PDD</option>
+              <option value="acara">Divisi Acara</option>
+              <option value="peralatan">Divisi Peralatan</option>
+              <option value="logistik">Divisi Logistik</option>
+              <option value="keamanan">Divisi Keamanan</option>
+              <option value="konsumsi">Divisi Konsumsi</option>
+              <option value="tarbiyah">Divisi Tarbiyah</option>
+              <option value="dakwah">Divisi Dakwah</option>
+              <option value="permainan">Divisi Permainan</option>
+              <option value="perlombaan">Divisi Perlombaan</option>
+              <option value="sosmas">Divisi Sosmas</option>
+              <option value="sosek">Divisi Sosek</option>
+              <option value="hal">Divisi Hub. Antar Lembaga</option>
+              <option value="kesehatan">Divisi Kesehatan</option>
+              <option value="kebersihan">Divisi Kebersihan</option>
+              <option value="support">Divisi Support</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Nama Anggota Baru</label><input type="text" id="sub-name" placeholder="Contoh: Sandi Pirmansah" required></div>
+          <div class="form-group"><label>Nama File Foto (.jpg)</label><input type="text" id="sub-img" placeholder="Contoh: pdd_sandi.jpg" required></div>
         </div>
-        <button type="submit" class="btn-save">Tambah Kartu Tim</button>
+        <button type="submit" class="btn-save">Tambah Anggota ke Divisi</button>
       </form>
     </div>
 
-    <!-- TABEL DAFTAR TIM -->
-    <div class="admin-card">
-      <h3>Daftar Pengurus Saat Ini</h3>
-      <table>
-        <thead><tr><th>Foto</th><th>Nama</th><th>Jabatan</th><th>Aksi</th></tr></thead>
-        <tbody id="admin-team-table"></tbody>
-      </table>
-    </div>
-
-    <!-- GANTI FOTO UTAMA ANGKATAN -->
+    <!-- KELOLA FOTO UTAMA ANGKATAN -->
     <div class="admin-card">
       <h3>Perbarui Foto Utama Angkatan XVI</h3>
       <form id="update-angkatan-form">
@@ -107,45 +117,40 @@ const defaultTeam = [
   {id:'sekretaris', name:'Dana Jaenal Mutakin', role:'Sekretaris', img:'sekretaris.jpg', members:[{name:'Dana Jaenal Mutakin', img:'sekretaris.jpg'}]},
   {id:'bendahara', name:'Karin Waladiatul Ramdani', role:'Bendahara', img:'bendahara.jpg', members:[{name:'Karin Waladiatul Ramdani', img:'bendahara.jpg'}]},
   {id:'pdd', name:'Arshal Dinur Fauzan', role:'Divisi PDD', img:'pdd.jpg', members:[{name:'Sandi Pirmansah', img:'pdd_sandi.jpg'}, {name:'M. Al-fauzan', img:'pdd_fauzan.jpg'}, {name:'Erni Nurwidiyanti', img:'pdd_erni.jpg'}, {name:'Raihana Kansa Aulia', img:'pdd_raihana.jpg'}]},
-  {id:'acara', name:'Nisa Adila Wardani', role:'Divisi Acara', img:'acara.jpg', members:[{name:'Nisa Adila Wardani', img:'acara.jpg'}]}
+  {id:'acara', name:'Nisa Adila Wardani', role:'Divisi Acara', img:'acara.jpg', members:[{name:'Nisa Adila Wardani', img:'acara.jpg'}]},
+  {id:'peralatan', name:'Zia Al-khulaeni', role:'Divisi Peralatan', img:'peralatan.jpg', members:[{name:'Zia Al-khulaeni', img:'peralatan.jpg'}]},
+  {id:'logistik', name:'Muhammad Akmal Al Fajri', role:'Divisi Logistik', img:'logistik.jpg', members:[{name:'Muhammad Akmal Al Fajri', img:'logistik.jpg'}]},
+  {id:'keamanan', name:'Indhira Hadi Pancasatria', role:'Divisi Keamanan', img:'keamanan.jpg', members:[{name:'Indhira Hadi Pancasatria', img:'keamanan.jpg'}]},
+  {id:'konsumsi', name:'Rahma Putri Ramadani', role:'Divisi Konsumsi', img:'konsumsi.jpg', members:[{name:'Rahma Putri Ramadani', img:'konsumsi.jpg'}]},
+  {id:'tarbiyah', name:'Hilya Nadzira Majdina', role:'Divisi Tarbiyah', img:'tarbiyah.jpg', members:[{name:'Hilya Nadzira Majdina', img:'tarbiyah.jpg'}]},
+  {id:'dakwah', name:'Muhammad Azzam Maulidan', role:'Divisi Dakwah', img:'dakwah.jpg', members:[{name:'Muhammad Azzam Maulidan', img:'dakwah.jpg'}]},
+  {id:'permainan', name:'Difa Mulki Hanifa', role:'Divisi Permainan', img:'permainan.jpg', members:[{name:'Difa Mulki Hanifa', img:'permainan.jpg'}]},
+  {id:'perlombaan', name:'Yusfi Ruslan Atsaury', role:'Divisi Perlombaan', img:'perlombaan.jpg', members:[{name:'Yusfi Ruslan Atsaury', img:'perlombaan.jpg'}]},
+  {id:'sosmas', name:'Pyckan Ramadania Putri', role:'Divisi Sosmas', img:'sosmas.jpg', members:[{name:'Pyckan Ramadania Putri', img:'sosmas.jpg'}]},
+  {id:'sosek', name:'Raisa Musakinah', role:'Divisi Sosek', img:'sosek.jpg', members:[{name:'Raisa Musakinah', img:'sosek.jpg'}]},
+  {id:'hal', name:'Dani Muhammad Ridwan', role:'Divisi Hub. Antar Lembaga', img:'hal.jpg', members:[{name:'Dani Muhammad Ridwan', img:'hal.jpg'}]},
+  {id:'kesehatan', name:'Rahmi Lestari S.M', role:'Divisi Kesehatan', img:'kesehatan.jpg', members:[{name:'Rahmi Lestari S.M', img:'kesehatan.jpg'}]},
+  {id:'kebersihan', name:'Ryan Sukma Gunardi', role:'Divisi Kebersihan', img:'kebersihan.jpg', members:[{name:'Ryan Sukma Gunardi', img:'kebersihan.jpg'}]},
+  {id:'support', name:'Muhammad Raihan Firdaus', role:'Divisi Support', img:'support.jpg', members:[{name:'Muhammad Raihan Firdaus', img:'support.jpg'}]}
 ];
 
 let teamData = JSON.parse(localStorage.getItem('p2m_team')) || defaultTeam;
 
-function renderAdminTable() {
-  const tbody = document.getElementById('admin-team-table');
-  tbody.innerHTML = '';
-  teamData.forEach((item, index) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><img src="${item.img}" onerror="this.src='bg.jpg'"></td>
-      <td><b>${item.name}</b></td>
-      <td>${item.role}</td>
-      <td><button class="btn-del" onclick="deleteTeamMember(${index})">Hapus</button></td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-document.getElementById('add-team-form').addEventListener('submit', function(e) {
+document.getElementById('add-submember-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const name = document.getElementById('add-name').value;
-  const role = document.getElementById('add-role').value;
-  const img = document.getElementById('add-img').value;
-  teamData.push({id: 'item_'+Date.now(), name, role, img, members:[]});
-  localStorage.setItem('p2m_team', JSON.stringify(teamData));
-  renderAdminTable();
-  alert('Anggota berhasil ditambahkan!');
-  this.reset();
-});
+  const targetId = document.getElementById('sub-divisi-target').value;
+  const name = document.getElementById('sub-name').value;
+  const img = document.getElementById('sub-img').value;
 
-function deleteTeamMember(index) {
-  if(confirm('Yakin ingin menghapus data ini?')) {
-    teamData.splice(index, 1);
+  const divisi = teamData.find(d => d.id === targetId);
+  if(divisi) {
+    if(!divisi.members) divisi.members = [];
+    divisi.members.push({name, img});
     localStorage.setItem('p2m_team', JSON.stringify(teamData));
-    renderAdminTable();
+    alert(`Berhasil menambahkan ${name} ke dalam ${divisi.role}!`);
+    this.reset();
   }
-}
+});
 
 document.getElementById('update-angkatan-form').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -153,8 +158,6 @@ document.getElementById('update-angkatan-form').addEventListener('submit', funct
   localStorage.setItem('p2m_angkatan_img', imgName);
   alert('Foto Angkatan XVI berhasil diperbarui!');
 });
-
-document.addEventListener('DOMContentLoaded', renderAdminTable);
 </script>
 </body>
 </html>
