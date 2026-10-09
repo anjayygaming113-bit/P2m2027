@@ -47,6 +47,16 @@ a{text-decoration:none;color:inherit}
 .btn-save{padding:12px 24px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer;transition:background .2s}
 .btn-save:hover{background:var(--green2)}
 
+/* TABEL DAFTAR ANGGOTA */
+.table-responsive{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th, td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
+th{background:#f9fbf9;color:var(--green);font-weight:800}
+td img{width:40px;height:40px;object-fit:cover;border-radius:8px;border:1px solid #ddd}
+.action-btns{display:flex;gap:8px}
+.btn-edit{background:var(--gold);color:#123127;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
+.btn-del{background:var(--danger);color:#fff;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:bold;border:none;cursor:pointer}
+
 @media(max-width:800px){
   .sidebar{width:70px;padding:20px 10px}
   .sidebar h2, .sidebar-menu span{display:none}
@@ -62,8 +72,8 @@ a{text-decoration:none;color:inherit}
     <h2>P2M 2027 ADMIN</h2>
     <div class="sidebar-menu">
       <a href="#" class="active">📊 Beranda Admin</a>
-      <a href="#kelola-anggota">👥 Kelola Pengurus Utama</a>
-      <a href="#kelola-subdivisi">📋 Tambah Anggota Divisi</a>
+      <a href="#tambah-anggota">➕ Tambah Anggota</a>
+      <a href="#daftar-anggota">✏️ Edit / Koreksi Data</a>
       <a href="#kelola-publikasi">📰 Publikasi Harian</a>
       <a href="#kelola-galeri">🖼️ Galeri Angkatan</a>
       <a href="index.html" style="margin-top:40px; color:#f8e8af;">← Kembali ke Website</a>
@@ -93,17 +103,17 @@ a{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <!-- 1. KELOLA PENGURUS UTAMA -->
-    <div class="admin-card" id="kelola-anggota">
-      <h3>Kelola Pengurus & Penanggung Jawab Utama</h3>
-      <form onsubmit="event.preventDefault(); alert('Data pengurus utama berhasil diperbarui!');">
+    <!-- 1. TAMBAH ANGGOTA / DIVISI BARU -->
+    <div class="admin-card" id="tambah-anggota">
+      <h3>Tambah Anggota atau Pengurus Baru</h3>
+      <form onsubmit="event.preventDefault(); alert('Anggota baru berhasil ditambahkan!');">
         <div class="form-grid">
           <div class="form-group">
             <label>Nama Lengkap</label>
-            <input type="text" placeholder="Contoh: Arshal Dinur Fauzan" required>
+            <input type="text" placeholder="Contoh: Sandi Pirmansah" required>
           </div>
           <div class="form-group">
-            <label>Pilih Posisi / Divisi Utama</label>
+            <label>Pilih Posisi / Divisi</label>
             <select>
               <option>Ketua Umum</option>
               <option>Ketua 1</option>
@@ -130,51 +140,55 @@ a{text-decoration:none;color:inherit}
             </select>
           </div>
           <div class="form-group">
-            <label>Unggah Foto Kartu Utama (.jpg)</label>
+            <label>Unggah Foto (.jpg)</label>
             <input type="file" accept="image/*" required>
           </div>
         </div>
-        <button type="submit" class="btn-save">Simpan Perubahan Pengurus</button>
+        <button type="submit" class="btn-save">Simpan Anggota Baru</button>
       </form>
     </div>
 
-    <!-- 2. TAMBAH ANGGOTA / PENGIKUT DI DALAM DIVISI (CONTOH: PDD) -->
-    <div class="admin-card" id="kelola-subdivisi">
-      <h3>Tambah Anggota ke dalam Divisi (Misal: Anggota PDD)</h3>
-      <form onsubmit="event.preventDefault(); alert('Anggota divisi berhasil ditambahkan!');">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Pilih Divisi Tujuan</label>
-            <select>
-              <option>Divisi PDD</option>
-              <option>Divisi Acara</option>
-              <option>Divisi Peralatan</option>
-              <option>Divisi Logistik</option>
-              <option>Divisi Keamanan</option>
-              <option>Divisi Konsumsi</option>
-              <option>Divisi Tarbiyah</option>
-              <option>Divisi Dakwah</option>
-              <option>Divisi Permainan</option>
-              <option>Divisi Perlombaan</option>
-              <option>Divisi Sosial Kemasyarakatan</option>
-              <option>Divisi Sosial Ekonomi</option>
-              <option>Divisi Hubungan Antar Lembaga</option>
-              <option>Divisi Kesehatan</option>
-              <option>Divisi Kebersihan</option>
-              <option>Divisi Support</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Nama Anggota</label>
-            <input type="text" placeholder="Contoh: Sandi Pirmansah" required>
-          </div>
-          <div class="form-group">
-            <label>Unggah Foto Detail Anggota (Tampil saat diklik)</label>
-            <input type="file" accept="image/*" required>
-          </div>
-        </div>
-        <button type="submit" class="btn-save">Tambah Anggota ke Divisi</button>
-      </form>
+    <!-- 2. TABEL KOREKSI / EDIT DATA ANGGOTA -->
+    <div class="admin-card" id="daftar-anggota">
+      <h3>Daftar & Koreksi Anggota (Edit Nama, Divisi, atau Foto)</h3>
+      <p style="font-size: 13px; color: var(--muted); margin-bottom: 15px;">Gunakan tombol Edit jika ada nama yang salah ketik, salah divisi, atau ingin mengganti foto.</p>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Nama Lengkap</th>
+              <th>Divisi / Jabatan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img src="ketua_umum.jpg" alt="Foto"></td>
+              <td>Muhammad Naufal Ismail</td>
+              <td>Ketua Umum</td>
+              <td>
+                <div class="action-btns">
+                  <button class="btn-edit" onclick="alert('Form edit data terbuka untuk Muhammad Naufal Ismail')">Edit</button>
+                  <button class="btn-del" onclick="alert('Data dihapus')">Hapus</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="pdd_sandi.jpg" alt="Foto" onerror="this.src='bg.jpg'"></td>
+              <td>Sandi Pirmansah</td>
+              <td>Divisi PDD</td>
+              <td>
+                <div class="action-btns">
+                  <button class="btn-edit" onclick="alert('Form edit data terbuka untuk Sandi Pirmansah')">Edit</button>
+                  <button class="btn-del" onclick="alert('Data dihapus')">Hapus</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- 3. KELOLA PUBLIKASI HARIAN -->
