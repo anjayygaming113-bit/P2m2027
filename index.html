@@ -240,9 +240,7 @@ h3{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:6px 0 14px}
   <span class="eyebrow">Struktur Organisasi</span>
   <h3>Tim P2M MA Plus Al-Ittihaad</h3>
   <p class="lead" style="margin-bottom:25px;">Geser ke samping dan klik pada divisi untuk melihat anggota.</p>
-  <div class="team-slider" id="team-slider-container">
-    <!-- Kartu Tim lengkap 22 Divisi & dinamis -->
-  </div>
+  <div class="team-slider" id="team-slider-container"></div>
  </div>
 </section>
 
@@ -325,7 +323,6 @@ const menu = document.getElementById('menu'), nav = document.getElementById('nav
 menu.addEventListener('click', () => nav.classList.toggle('open'));
 function closeNav() { nav.classList.remove('open'); }
 
-// Data lengkap 22 Divisi & Pengurus Utama P2M 2027
 const defaultTeam = [
   {id:'ketua', name:'Muhammad Naufal Ismail', role:'Ketua Umum', img:'ketua_umum.jpg', members:[]},
   {id:'ketua1', name:'Rafli Habiburrohman', role:'Ketua 1', img:'ketua1.jpg', members:[]},
